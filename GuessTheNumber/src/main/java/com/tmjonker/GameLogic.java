@@ -2,16 +2,32 @@ package com.tmjonker;
 
 import java.util.Scanner;
 
-public class Main {
+public class GameLogic {
 
-    public static void main(String[] args) {
+    private String name;
+    private final Scanner scanner;
+    private int randomNumber;
+    private int counter;
+    int userGuess;
+
+    public GameLogic() {
+        randomNumber = (int) (Math.random() * 20) + 1;
+        counter = 0;
+        scanner = new Scanner(System.in);
+        name = "";
+        userGuess = 0;
+    }
+
+    public void runGame() {
+        name = getNameFromUser();
+        promptForGuess();
+        userGuess = getGuessFromUser();
+        testUserGuess();
+    }
+
+    private String getNameFromUser() {
 
         String name = "";
-
-        Scanner scanner = new Scanner(System.in);
-        int randomNumber = (int) (Math.random() * 20) + 1;
-        
-        int counter = 0;
         System.out.println("Hello! What is your name?");
 
         try {
@@ -19,7 +35,10 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        return name;
+    }
 
+    private void promptForGuess() {
         System.out.println("Well, " + name + ", I am thinking of a number between 1 and 20.\nTake a guess.");
 
         try {
@@ -30,8 +49,10 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+    }
 
-        int userGuess =  0;
+    private int getGuessFromUser() {
+        int userGuess = 0;
 
         try {
             userGuess = scanner.nextInt();
@@ -39,7 +60,10 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        return userGuess;
+    }
 
+    private void testUserGuess() {
         boolean validEntry = true;
 
         while (userGuess != randomNumber && counter <= 5) {
@@ -61,13 +85,28 @@ public class Main {
                 validEntry = false;
                 scanner.nextLine();
             }
-        }
 
-        if (userGuess == randomNumber) {
-            System.out.println("Good job, " + name + "! You guessed my number in " + counter + " guesses!");
-        } else if (counter == 6) {
-            System.out.println("Sorry, " + name + "! You did not guess my number in 6 guesses!");
+            if (userGuess == randomNumber) {
+                System.out.println("Good job, " + name + "! You guessed my number in " + counter + " guesses!");
+            } else if (counter == 6) {
+                System.out.println("Sorry, " + name + "! You did not guess my number in 6 guesses!");
+            }
         }
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getUserGuess() {
+        return userGuess;
+    }
+
+    public void setUserGuess(int userGuess) {
+        this.userGuess = userGuess;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
