@@ -1,10 +1,7 @@
 package com.tmjonker;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class GameController {
 
@@ -28,22 +25,22 @@ public class GameController {
         gameLoop();
     }
 
-    public void showTitleScreen() {
+    private void showTitleScreen() {
         System.out.println("\nWelcome to HUMANS VS. GOBLINS!");
         System.out.println("Please choose a name for your character: \n");
     }
 
-    public void showInstructions() {
+    private void showInstructions() {
         System.out.println("\nYour position is marked on the map with an H.");
         System.out.println("Goblins are marked on the map with a G.");
     }
 
-    public void promptForDirection() {
+    private void promptForDirection() {
         System.out.println("\nWhich direction would you like to go, " + player.getName() + "?");
         System.out.println("(N, S, E, W, or Q to quit)\n");
     }
 
-    public void gameLoop() {
+    private void gameLoop() {
         String userInput = "";
         while (!userInput.equals("Q") && !userInput.equals("q")) {
             while (!userInput.matches("[nNsSeEwWqQ]")) {
@@ -201,7 +198,7 @@ public class GameController {
         return battle;
     }
 
-    public Human generateHuman() {
+    private Human generateHuman() {
 
         String name = "";
 
@@ -215,17 +212,5 @@ public class GameController {
             }
         }
         return new Human(name);
-    }
-}
-
-class Pauser implements Runnable {
-
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(10000);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
     }
 }
