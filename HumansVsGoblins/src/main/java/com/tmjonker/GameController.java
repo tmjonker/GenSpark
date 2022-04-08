@@ -63,6 +63,8 @@ public class GameController {
                     e.printStackTrace();
                 }
                 commenceBattle();
+                land.printGrid();
+                userInput = "";
             } else {
                 land.printGrid();
                 userInput = "";
@@ -73,6 +75,8 @@ public class GameController {
     private void commenceBattle() {
 
         Goblin goblin = new Goblin();
+        goblin.setX(player.getX());
+        goblin.setY(player.getY());
 
         while (goblin.getHealth() > 0 && player.getHealth() > 0) {
 
@@ -133,6 +137,14 @@ public class GameController {
                     }
                 }
             }
+            if (player.getHealth() < 0) {
+                System.out.println("You have fought valiantly, but you have died!");
+                System.exit(0);
+            } else if (goblin.getHealth() < 0) {
+                System.out.println("You ruthlessly slaughtered " + goblin.getName() + ", ");
+                break;
+            }
+
             if (!fleeOrBattle()) {
                 System.out.println("You turn and run away.");
                 System.out.println(player.getName() + " lives to fight another day!\n");
@@ -173,14 +185,14 @@ public class GameController {
                 }
             }
             case "s" -> {
-                if (x+1 <= 11) {
+                if (x+1 < 11) {
                     battle = land.updateHumanLocation(x, y, x+1, y);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
             case "e" -> {
-                if (y+1 <= 11) {
+                if (y+1 < 11) {
                     battle = land.updateHumanLocation(x, y, x, y+1);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
@@ -208,6 +220,7 @@ public class GameController {
 
             } catch (Exception e) {
                 System.out.println("A fatal error has occurred.  Game will now restart.");
+                name = "q";
                 startGame();
             }
         }

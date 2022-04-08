@@ -1,19 +1,18 @@
 package com.tmjonker;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Land {
 
     private final int ROWS = 11;
     private final int COLUMNS = 11;
 
-    private char[][] grid;
-    private HashMap<Integer, Integer> goblinLocations;
-    private HashMap<String, Integer> humanLocation;
+    private final char[][] grid;
+    private final HashMap<String, Integer> humanLocation;
 
     public Land() {
 
-        goblinLocations = new HashMap<>();
         humanLocation = new HashMap<>();
         grid = new char[ROWS][COLUMNS];
         createDefaultGrid();
@@ -40,7 +39,6 @@ public class Land {
             int row = (int) (Math.random() * ROWS);
             int column = (int) (Math.random() * COLUMNS);
             grid[row][column] = 'G';
-            goblinLocations.put(row, column); // Saves goblin starting locations.
         }
     }
 
@@ -78,10 +76,6 @@ public class Land {
         humanLocation.replace("y", startY, endY);
 
         return goblinEncountered;
-    }
-
-    public HashMap<Integer, Integer> getGoblinLocations() {
-        return goblinLocations;
     }
 
     public HashMap<String, Integer> getHumanLocation() {

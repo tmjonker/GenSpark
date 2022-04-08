@@ -5,6 +5,8 @@ public class Goblin implements Humanoid {
     private String name;
     private int health;
     private int damage;
+    private int x;
+    private int y;
 
     public Goblin() {
         RandomNameGenerator rng = new RandomNameGenerator();
@@ -21,6 +23,14 @@ public class Goblin implements Humanoid {
         ((Human) target).setHealth(((Human) target).getHealth() - damageDealt);
 
         return target;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setHealth(int health) {
