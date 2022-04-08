@@ -33,6 +33,7 @@ public class GameController {
     private void showInstructions() {
         System.out.println("\nYour position is marked on the map with an H.");
         System.out.println("Goblins are marked on the map with a G.");
+        System.out.println("Treasure is marked on the map with a T.");
     }
 
     private void promptForDirection() {
@@ -40,6 +41,7 @@ public class GameController {
         System.out.println("(N, S, E, W, or Q to quit)\n");
     }
 
+    // Main game loop
     private void gameLoop() {
         String userInput = "";
         while (!userInput.equals("Q") && !userInput.equals("q")) {
@@ -53,25 +55,59 @@ public class GameController {
                     startGame();
                 }
             }
-            if (movePlayer(userInput)) {
+
+            char interactionEncountered = movePlayer(userInput);
+
+            if (interactionEncountered == 'G') {
                 land.printGrid();
                 System.out.println("\nYou have encountered a goblin!");
                 System.out.println("Let the battle commence!\n");
+
                 try {
                     Thread.sleep(2000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 commenceBattle();
                 land.printGrid();
-                userInput = "";
+                userInput = ""; // resets user input to restart the loop.
+            } else if (interactionEncountered == 'T') {
+                land.printGrid();
+                System.out.println("\nYou have found a treasure chest!");
+                System.out.println("Let's see what's inside...\n");
+
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                collectTreasure();
+
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                land.printGrid();
+                userInput = ""; // resets user input to restart the loop.
             } else {
                 land.printGrid();
-                userInput = "";
+                userInput = ""; // resets user input to restart the loop.
             }
         }
     }
 
+    private void collectTreasure() {
+        int gold = (int) (Math.random() * 100) + 1;
+        System.out.println("You have found " + gold + " gold!");
+        player.setGold((player.getGold() + gold));
+        System.out.println("You now have a total of " + player.getGold() + " gold.");
+    }
+
+    // Contains all the battle logic.
     private void commenceBattle() {
 
         Goblin goblin = new Goblin();
@@ -151,10 +187,9 @@ public class GameController {
                 break;
             }
         }
-
-     // Need to insert code to notify user that they died or that they killed the goblin.
     }
 
+    // Prompts user to choose whether or not they want to flee battle or continue to fight.
     private boolean fleeOrBattle() {
         System.out.println("Fight or flee?\n");
 
@@ -170,11 +205,12 @@ public class GameController {
         return !battleChoice.equals("flee");
     }
 
-    private boolean movePlayer(String direction) {
+    // checks to see if move will be out of bounds, if not moves player according to selection.
+    private char movePlayer(String direction) {
 
         int x = player.getX();
         int y = player.getY();
-        boolean battle = false;
+        char battle = 'N'; // defaults to 'N' which stands for NOTHING.
 
         switch (direction) {
             case "n" -> {
@@ -210,6 +246,7 @@ public class GameController {
         return battle;
     }
 
+    // Generates a new human player.
     private Human generateHuman() {
 
         String name = "";

@@ -1,5 +1,6 @@
 package com.tmjonker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -29,6 +30,7 @@ public class Land {
         }
 
         generateGoblinLocations(); // Adds goblins to the starting map.
+        generateTreasureLocations(); // Adds treasure chests to the starting map.
         generateHumanStartingLocation(); // Adds human to the starting map.
     }
 
@@ -38,17 +40,41 @@ public class Land {
         for (int i = 0; i < 10; i++) {
             int row = (int) (Math.random() * ROWS);
             int column = (int) (Math.random() * COLUMNS);
-            grid[row][column] = 'G';
+            if (grid[row][column] == 'G')
+                i--;
+            else
+                grid[row][column] = 'G';
+        }
+    }
+
+    private void generateTreasureLocations() {
+
+        for (int i = 0; i < 10; i++) {
+            int row = (int) (Math.random() * ROWS);
+            int column = (int) (Math.random() * COLUMNS);
+
+            if (grid[row][column] == 'G' || grid[row][column] == 'T') {
+                i--;
+            } else {
+                grid[row][column] = 'T';
+            }
         }
     }
 
     private void generateHumanStartingLocation() {
 
-        int row = (int) (Math.random() * ROWS);
-        int column = (int) (Math.random() * COLUMNS);
-        grid[row][column] = 'H';
-        humanLocation.put("x", row);
-        humanLocation.put("y", column);
+        for (int i = 0; i < 1; i++) {
+            int row = (int) (Math.random() * ROWS);
+            int column = (int) (Math.random() * COLUMNS);
+
+            if (grid[row][column] != 'T' && grid[row][column] != 'G') {
+                grid[row][column] = 'H';
+                humanLocation.put("x", row);
+                humanLocation.put("y", column);
+            } else {
+                i--;
+            }
+        }
     }
 
     public void printGrid() {
@@ -64,18 +90,19 @@ public class Land {
     }
 
     //Update human location. Return TRUE is goblin is encountered, return FALSE if no goblin has been encountered.
-    public boolean updateHumanLocation(int startX, int startY, int endX, int endY) {
+    public char updateHumanLocation(int startX, int startY, int endX, int endY) {
 
-        boolean goblinEncountered = false;
+        char interactionEncountered = 'N'; // Default is N, which stands for Nothing.
 
-        goblinEncountered = grid[endX][endY] == 'G';
+        if (grid[endX][endY] == 'T' || grid[endX][endY] == 'G')
+            interactionEncountered = grid[endX][endY];
 
         grid[endX][endY] = 'H';
         grid[startX][startY] = '~';
         humanLocation.replace("x", startX, endX);
         humanLocation.replace("y", startY, endY);
 
-        return goblinEncountered;
+        return interactionEncountered;
     }
 
     public HashMap<String, Integer> getHumanLocation() {

@@ -39,8 +39,8 @@ class HumanTest {
     }
 
     @Test
-    void getArmor() {
-        assertEquals(0, human.getArmor(), "Expected to be 0");
+    void getGold() {
+        assertEquals(0, human.getGold(), "Expected 0");
     }
 
     @AfterEach

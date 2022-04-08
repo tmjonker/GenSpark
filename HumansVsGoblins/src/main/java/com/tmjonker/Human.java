@@ -7,17 +7,15 @@ public class Human implements Humanoid {
     private String name;
     private int health;
     private int weaponDamage;
-    private int armor;
-    private ArrayList<Object> inventory;
+    private int gold;
     private int x;
     private int y;
 
     public Human(String name) {
         this.name = name;
         health = 100;
-        armor = 0;
+        gold = 0;
         weaponDamage = 2; // Human starts off with fists, can upgrade for higher weapon damage.
-        inventory = new ArrayList<>();
     }
 
     @Override
@@ -58,28 +56,20 @@ public class Human implements Humanoid {
         return weaponDamage;
     }
 
-    public int getArmor() {
-        return armor;
+    public int getGold() {
+        return gold;
     }
 
     public void setHealth(int health) {
         this.health = health;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
     public void setWeaponDamage(int weaponDamage) {
         this.weaponDamage = weaponDamage;
     }
 
-    public ArrayList<Object> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(ArrayList<Object> inventory) {
-        this.inventory = inventory;
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
     @Override
@@ -88,7 +78,7 @@ public class Human implements Humanoid {
                 "name='" + name + '\'' +
                 ", health=" + health +
                 ", weaponDamage=" + weaponDamage +
-                ", armor=" + armor +
+                ", gold=" + gold +
                 '}';
     }
 }
