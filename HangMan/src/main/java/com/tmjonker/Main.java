@@ -7,7 +7,6 @@ public class Main {
     private static HangMan hangMan;
     private static Scanner scanner = new Scanner(System.in);
     private static String guess = "";
-    private static boolean endGame = false;
     private static int guesses = 0;
     private static boolean playAgain = true;
 
@@ -34,7 +33,6 @@ public class Main {
             if (userPrompt.equals("no"))
                 playAgain = false;
             else {
-                endGame = false;
                 playAgain = true;
             }
         }
@@ -42,7 +40,7 @@ public class Main {
 
     public static void startGame() {
 
-        while (!endGame) {
+        while (true) {
 
             try {
                 guess = scanner.nextLine();
@@ -50,12 +48,15 @@ public class Main {
                 System.out.println(e.toString());
             }
 
-            endGame = hangMan.updateHangMan(guess);
+            if (hangMan.updateHangMan(guess)) { // returns true if player has guessed the correct word.
+                hangMan.victory();  // if true, victory is initialized indicating that the player has won.
+                break;
+            }
 
             guesses = hangMan.getNumberOfGuesses();
 
-            if (guesses == 7) {
-                endGame = true;
+            if (guesses == 7) {  // if the number of guesses by the player == 7, then the player loses.
+                break;
             }
         }
     }

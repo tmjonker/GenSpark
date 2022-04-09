@@ -7,7 +7,15 @@ public class WordGenerator {
     private ArrayList<String> wordList;
 
     public WordGenerator() {
-
+        wordList = new ArrayList<>();
+        wordList.add("elephant");
+        wordList.add("dog");
+        wordList.add("ketchup");
+        wordList.add("barstool");
+        wordList.add("chicken");
+        wordList.add("superman");
+        wordList.add("cat");
+        wordList.add("jewel");
     }
 
     public WordGenerator(ArrayList<String> wordList) {

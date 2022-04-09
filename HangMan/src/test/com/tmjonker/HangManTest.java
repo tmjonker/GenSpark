@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class HangManTest {
 
     HangMan hangMan;
+
+
     @BeforeEach
     void setUp() {
         ArrayList<String> arrayList = new ArrayList<>();
