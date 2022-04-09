@@ -71,6 +71,7 @@ public class HangMan {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(name + "-" + numberOfWins + "/");
             bufferedWriter.close();
+            fileWriter.close();
             highScoreFileString = Files.readString(highScoreFile.toPath(), StandardCharsets.UTF_8);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -78,7 +79,7 @@ public class HangMan {
 
         String[] highScores = highScoreFileString.split("/");
         List<String> list = Arrays.stream(highScores)
-                .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) > 1).toList();
+                .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) > numberOfWins).toList();
 
         // Sorts High Score List based on number of wins.
         ArrayList<String> highScoreList = new ArrayList<>(list);
@@ -86,15 +87,19 @@ public class HangMan {
                 s1.length()).compareTo(s2.substring(s2.indexOf("-") + 1, s2.length())));
         Collections.reverse(highScoreList);
 
-        if (highScoreList.size() < 1) {
-            System.out.println("\nCongratulations, you have the high score with " + numberOfWins + " wins!\n");
-            System.out.println("High Scores: ");
-            highScoreList.forEach(s -> System.out.println(s));
+        int highestScoreOnFile = 0;
 
+        if (highScoreList.size() > 0) {
+            String hs = highScoreList.get(0);  // Highest Score in the highscores.txt file.
+            highestScoreOnFile = Integer.parseInt(hs.substring(hs.indexOf('-') + 1, hs.length()));
+        }
+
+        if (numberOfWins >= highestScoreOnFile) {
+            System.out.println("\nCongratulations, you have the high score with " + numberOfWins + " wins!\n");
         } else {
             System.out.println("\nYou do not have the current high score!\n");
-            System.out.println("High Scores: ");
-            highScoreList.forEach(s -> System.out.println(s));
+            System.out.print("High Score: ");
+            System.out.println(highScoreList.get(0));
         }
     }
 
