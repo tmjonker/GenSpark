@@ -42,8 +42,9 @@ public class Land {
             int column = (int) (Math.random() * COLUMNS);
             if (grid[row][column] == 'G')
                 i--;
-            else
+            else {
                 grid[row][column] = 'G';
+            }
         }
     }
 

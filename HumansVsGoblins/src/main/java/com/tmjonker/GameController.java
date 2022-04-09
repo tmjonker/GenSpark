@@ -177,12 +177,23 @@ public class GameController {
                 System.exit(0);
             } else if (goblin.getHealth() < 0) {
                 System.out.println("You ruthlessly slaughtered " + goblin.getName() + ", ");
+                System.out.println("You step over their lifeless corpse to continue your journey.");
+                try {
+                    Thread.sleep(2000);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             }
 
             if (!fleeOrBattle()) {
                 System.out.println("You turn and run away.");
                 System.out.println(player.getName() + " lives to fight another day!\n");
+                try {
+                    Thread.sleep(2000);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             }
         }
