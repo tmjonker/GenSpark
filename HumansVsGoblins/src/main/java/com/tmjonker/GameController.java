@@ -11,7 +11,7 @@ public class GameController {
 
     public GameController() {
 
-        startGame();
+        startGame(); // constructor automatically initializes gameplay.
     }
 
     public void startGame() {

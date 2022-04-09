@@ -13,8 +13,13 @@ public class Main {
 
     public static void main(String[] args) {
 
+        hangMan = new HangMan();
+
         while (playAgain) {
+            hangMan.startGame();
+
             startGame();
+
             System.out.println("\nDo you want to play again? (yes or no)");
 
             String userPrompt = "";
@@ -36,8 +41,6 @@ public class Main {
     }
 
     public static void startGame() {
-
-        hangMan = new HangMan();
 
         while (!endGame) {
 

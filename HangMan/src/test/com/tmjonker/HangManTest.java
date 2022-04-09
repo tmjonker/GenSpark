@@ -15,7 +15,8 @@ class HangManTest {
     void setUp() {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("dog");
-        hangMan = new HangMan(arrayList);
+        hangMan = new HangMan();
+        hangMan.startGame(arrayList);
     }
 
     @Test

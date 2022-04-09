@@ -1,17 +1,33 @@
 package com.tmjonker;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HangMan {
 
-    private final WordGenerator wordGenerator;
+    private WordGenerator wordGenerator;
     private String word;
     private int numberOfGuesses;
     private HashMap<Integer, Integer> letterMap = new HashMap<>();
     private ArrayList<String> missedLetters = new ArrayList<>();
+    private String[] gallowArray;
+    private int numberOfWins = 0;
+    private String name = "";
 
     public HangMan() {
+
+    }
+
+    public void startGame() {
+        loadHangManFile();
+
+        letterMap.clear();
+        missedLetters.clear();
 
         ArrayList<String> wordList = new ArrayList<>();
         wordList.add("elephant");
@@ -26,7 +42,8 @@ public class HangMan {
         drawLetterField();
     }
 
-    public HangMan(ArrayList<String> wordList) {
+    public void startGame(ArrayList<String> wordList) {
+        loadHangManFile();
 
         wordGenerator = new WordGenerator(wordList);
         word = wordGenerator.generateWord();
@@ -36,99 +53,63 @@ public class HangMan {
         drawLetterField();
     }
 
-    public void drawGallows() {
-        System.out.println("H A N G M A N");
-        System.out.println("  +---+");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
+    public void resetGame() {
 
-    public void drawHead() {
-        System.out.println("  +---+");
-        System.out.println("  O   |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
-
-    public void drawChest() {
-        System.out.println("  +---+");
-        System.out.println("  O   |");
-        System.out.println("  |   |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
-
-    public void drawRightArm() {
-        System.out.println("  +---+");
-        System.out.println("  O   |");
-        System.out.println("  | \\ |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
-
-    public void drawLeftArm() {
-        System.out.println("  +---+");
-        System.out.println("  O   |");
-        System.out.println("/ | \\ |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
-
-    public void drawGroin() {
-
-        System.out.println("  +---+");
-        System.out.println("  O   |");
-        System.out.println("/ | \\ |");
-        System.out.println("  |   |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("      |");
-        System.out.println("    =====\n");
-    }
-
-    public void drawRightLeg() {
-        System.out.println("    +---+");
-        System.out.println("    O   |");
-        System.out.println("  / | \\ |");
-        System.out.println("    |   |");
-        System.out.println("     \\  |");
-        System.out.println("        |");
-        System.out.println("        |");
-        System.out.println("      =====\n");
 
     }
 
-    public void drawLeftLeg() {
+    // Loads the hangman artwork file from 'hangman.txt'.
+    private void loadHangManFile() {
 
-        System.out.println("    +---+");
-        System.out.println("    O   |");
-        System.out.println("  / | \\ |");
-        System.out.println("    |   |");
-        System.out.println("   / \\  |");
-        System.out.println("        |");
-        System.out.println("        |");
-        System.out.println("      =====\n");
+        String hangManFileString = "";
+
+        try {
+            File hangManFile = new File(getClass().getClassLoader().getResource("hangman.txt").toURI());
+            hangManFileString = Files.readString(hangManFile.toPath(), StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        gallowArray = hangManFileString.split(",");
     }
 
-    public void drawLetterField() {
+    private void drawGallows() {
+        System.out.println(gallowArray[0]);
+    }
+
+    private void drawHead() {
+        System.out.println(gallowArray[1]);
+    }
+
+    private void drawChest() {
+        System.out.println(gallowArray[2]);
+    }
+
+    private void drawRightArm() {
+        System.out.println(gallowArray[3]);
+    }
+
+    private void drawLeftArm() {
+        System.out.println(gallowArray[4]);
+    }
+
+    private void drawGroin() {
+
+        System.out.println(gallowArray[5]);
+    }
+
+    private void drawRightLeg() {
+
+        System.out.println(gallowArray[6]);
+
+    }
+
+    private void drawLeftLeg() {
+
+        System.out.println(gallowArray[7]);
+    }
+
+    private void drawLetterField() {
 
         int numberOfDashes = word.length();
 
@@ -142,7 +123,7 @@ public class HangMan {
         System.out.println("Guess a letter!");
     }
 
-    public boolean updateLetterField(String guess) {
+    private boolean updateLetterField(String guess) {
 
         for (int i = 0; i < word.length(); i++) {
             String subString = word.substring(i, i+1);
@@ -154,12 +135,11 @@ public class HangMan {
                     return false;
                 }
             }
-
         }
 
         for (int i = 0; i < word.length(); i++) {
             if (letterMap.containsKey(i)) {
-                System.out.print(word.substring(i, i+1));
+                System.out.print(word.charAt(i));
             } else {
                 System.out.print("_");
             }
@@ -168,12 +148,66 @@ public class HangMan {
         if (letterMap.size() != word.length())
             System.out.println("\n\nGuess a letter!");
         else
-            System.out.println("\n\nYes! The secret word is \"" + word + "\"! you have won!");
+            victory();
 
         return letterMap.size() == word.length();
     }
 
-    public void updateLetterField() {
+    private void victory() {
+
+
+        numberOfWins++;
+        System.out.println("\n\nYes! The secret word is \"" + word + "\"! you have won!");
+
+        while (name.equals("")) {
+
+            System.out.println("Please enter your name: ");
+            Scanner scanner = new Scanner(System.in);
+            name = scanner.nextLine();
+        }
+
+        addCheckHighScore();
+    }
+
+    // Loads High Score file, writes score to high score list, and reads and sorts the high score list.
+    private void addCheckHighScore() {
+
+        String highScoreFileString = "";
+        try {
+            // Change path to reflect the Absolute path for your highscore.txt file.
+            File highScoreFile = new File("/home/tim/Projects/GenSpark/HangMan/src/main/resources/highscore.txt");
+            FileWriter fileWriter = new FileWriter(highScoreFile, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(name + "-" + numberOfWins + "/");
+            bufferedWriter.close();
+            highScoreFileString = Files.readString(highScoreFile.toPath(), StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        String[] highScores = highScoreFileString.split("/");
+        List<String> list = Arrays.stream(highScores)
+                .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) > 1).toList();
+
+        // Sorts High Score List based on number of wins.
+        ArrayList<String> highScoreList = new ArrayList<>(list);
+        highScoreList.sort((s1, s2) -> s1.substring(s1.indexOf("-") + 1,
+                s1.length()).compareTo(s2.substring(s2.indexOf("-") + 1, s2.length())));
+        Collections.reverse(highScoreList);
+
+        if (highScoreList.size() < 1) {
+            System.out.println("\nCongratulations, you have the high score with " + numberOfWins + " wins!\n");
+            System.out.println("High Scores: ");
+            highScoreList.forEach(s -> System.out.println(s));
+
+        } else {
+            System.out.println("\nYou do not have the current high score!\n");
+            System.out.println("High Scores: ");
+            highScoreList.forEach(s -> System.out.println(s));
+        }
+    }
+
+    private void updateLetterField() {
 
         for (int i = 0; i < word.length(); i++) {
             if (letterMap.containsKey(i)) {
