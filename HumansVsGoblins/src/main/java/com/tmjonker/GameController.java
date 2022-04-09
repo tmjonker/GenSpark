@@ -2,7 +2,6 @@ package com.tmjonker;
 
 import java.util.Scanner;
 
-
 public class GameController {
 
     private Land land;
