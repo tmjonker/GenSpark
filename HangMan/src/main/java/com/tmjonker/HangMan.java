@@ -79,7 +79,7 @@ public class HangMan {
 
         String[] highScores = highScoreFileString.split("/");
         List<String> list = Arrays.stream(highScores)
-                .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) > numberOfWins).toList();
+                .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) >= numberOfWins).toList();
 
         // Sorts High Score List based on number of wins.
         ArrayList<String> highScoreList = new ArrayList<>(list);
