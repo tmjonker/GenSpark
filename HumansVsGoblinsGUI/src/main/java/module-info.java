@@ -10,14 +10,16 @@ module com.tmjonker.demo {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.tmjonker.demo.game to javafx.fxml;
-    exports com.tmjonker.demo.game;
-    exports com.tmjonker.demo.game.accessory;
-    opens com.tmjonker.demo.game.accessory to javafx.fxml;
-    exports com.tmjonker.demo.game.sprite;
-    opens com.tmjonker.demo.game.sprite to javafx.fxml;
-    exports com.tmjonker.demo.game.input;
-    opens com.tmjonker.demo.game.input to javafx.fxml;
-    exports com.tmjonker.demo.game.settings;
-    opens com.tmjonker.demo.game.settings to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.accessory;
+    opens com.tmjonker.demo.humansvsgoblinsgui.accessory to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.sprite;
+    opens com.tmjonker.demo.humansvsgoblinsgui.sprite to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.input;
+    opens com.tmjonker.demo.humansvsgoblinsgui.input to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.settings;
+    opens com.tmjonker.demo.humansvsgoblinsgui.settings to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.main;
+    opens com.tmjonker.demo.humansvsgoblinsgui.main to javafx.fxml;
+    exports com.tmjonker.demo.humansvsgoblinsgui.game;
+    opens com.tmjonker.demo.humansvsgoblinsgui.game to javafx.fxml;
 }
