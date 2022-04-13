@@ -1,0 +1,19 @@
+.text-area *.text {
+    -fx-text-alignment: center;
+}
+
+#healthText {
+    -fx-text-alignment: right;
+}
+
+#health {
+    -fx-text-alignment: right;
+}
+
+.text-area .content{
+    -fx-background-color: lightgrey;
+}
+
+.text-area{
+    -fx-text-fill: black;
+}
