@@ -68,7 +68,7 @@ public class Player extends Sprite {
         // starts the sprite animation that makes the character's legs move.
         animation.play();
 
-//        checkBounds();
+        checkBounds();
     }
 
     /* Checks to see if moving the player will cause them to go out of bounds.. if so, then their x or y gets set to

@@ -29,10 +29,23 @@ public abstract class Accessory {
 
         this.w = image.getWidth();
         this.h = image.getHeight();
-        System.out.println(h);
-        System.out.println(w);
 
         addToLayer();
+    }
+
+    public Accessory(Image image, double x, double y) {
+
+        this.image = image;
+        this.x = x;
+        this.y = y;
+
+        imageView = new ImageView(image);
+        imageView.setFitHeight(30);
+        imageView.setFitWidth(30);
+        imageView.relocate(x, y);
+
+        this.w = image.getWidth();
+        this.h = image.getHeight();
     }
 
     // adds accessory image to map.
