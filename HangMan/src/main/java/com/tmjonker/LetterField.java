@@ -10,6 +10,7 @@ public class LetterField {
 
     private final HashMap<Integer, Integer> letterMap = new HashMap<>();
 
+    // Contains all the code pertaining to the letter field that populates guesses and matched letters.
     public LetterField(String word) {
 
 

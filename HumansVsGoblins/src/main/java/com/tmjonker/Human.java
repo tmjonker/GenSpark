@@ -15,11 +15,12 @@ public class Human implements Humanoid {
         this.name = name;
         health = 100;
         gold = 0;
-        weaponDamage = 2; // Human starts off with fists, can upgrade for higher weapon damage.
+        weaponDamage = 2;
     }
 
     @Override
     public Humanoid attack(Humanoid target) {
+        // random damage modifier adds 1-3 to human's damage output.
         int damageModifier = (int) (Math.random() * 3) + 1;
         int damageDealt = weaponDamage * damageModifier;
 

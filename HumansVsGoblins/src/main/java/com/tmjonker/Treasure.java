@@ -2,6 +2,7 @@ package com.tmjonker;
 
 public class Treasure {
 
+    // Adds gold that was found to the player.
     public void collectTreasure(Human player) {
         int gold = (int) (Math.random() * 100) + 1;
         System.out.println("You have found " + gold + " gold!");

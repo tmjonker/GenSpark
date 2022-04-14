@@ -14,10 +14,11 @@ public class Main {
 
         hangMan = new HangMan();
 
+        // Main game loop
         while (playAgain) {
             hangMan.startGame();
 
-            startGame();
+            startGame();  // Loop that continuously prompts user for guesses.
 
             System.out.println("\nDo you want to play again? (yes or no)");
 
@@ -40,6 +41,7 @@ public class Main {
 
     public static void startGame() {
 
+        // Main guess loop to get player's guesses.
         while (true) {
 
             try {

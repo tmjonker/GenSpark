@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 
+// Main game class.. contains most of the base game logic.
 public class HangMan {
 
     private GallowsDrawer gallowsDrawer;
@@ -102,7 +103,7 @@ public class HangMan {
             System.out.println(highScoreList.get(0));
         }
     }
-
+    // Updates hangman drawing based on quality of player's guess.
     public boolean updateHangMan(String guess) {
 
         if (!word.contains(guess)) {
