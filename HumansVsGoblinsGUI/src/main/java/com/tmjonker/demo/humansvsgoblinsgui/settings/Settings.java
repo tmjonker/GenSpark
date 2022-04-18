@@ -7,7 +7,7 @@ public class Settings {
 
     public static double SCENE_HEIGHT = 800;
 
-    public static double PLAYER_SPEED = 5.0;
+    public static double PLAYER_SPEED = 5.0; // Speed that the player moves across the map.
     public static double PLAYER_HEALTH = 200;
     public static double MIN_PLAYER_DAMAGE = 2;
 

@@ -166,7 +166,7 @@ public class Game {
                 // moves the player sprite across the screen based on changes to x and y from .move().
                 player.updateUI();
 
-                // if enemies have been defeated, then they are triggered for deletion and deleted.
+                // if enemies have been defeated, then they are triggered for removal and then removed from the map.
                 removeSprites(enemies);
                 // if potions have been collided with, then they are removed from the map.
                 removeAccessories(potions);
@@ -437,7 +437,7 @@ public class Game {
                         "You have " + (int) player.getHealth() + " health remaining...");
             }
         }
-
+        // if enemy health drops to 0 or below, flag enemy for removal.
         if (enemy.getHealth() <= 0) {
             enemy.remove();
         }
