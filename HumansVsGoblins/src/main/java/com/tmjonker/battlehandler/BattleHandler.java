@@ -1,4 +1,7 @@
-package com.tmjonker;
+package com.tmjonker.battlehandler;
+
+import com.tmjonker.humanoid.Goblin;
+import com.tmjonker.humanoid.Human;
 
 import java.util.Scanner;
 

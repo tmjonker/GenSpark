@@ -1,5 +1,7 @@
 package com.tmjonker;
 
+import com.tmjonker.humanoid.Goblin;
+import com.tmjonker.humanoid.Human;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +37,7 @@ class HumanTest {
 
     @Test
     void getWeaponDamage() {
-        assertEquals(2, human.getWeaponDamage(), "Expected to be 2.");
+        assertEquals(2, human.getDamage(), "Expected to be 2.");
     }
 
     @Test

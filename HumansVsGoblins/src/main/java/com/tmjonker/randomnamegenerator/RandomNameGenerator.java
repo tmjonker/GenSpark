@@ -1,4 +1,4 @@
-package com.tmjonker;
+package com.tmjonker.randomnamegenerator;
 
 import java.util.ArrayList;
 

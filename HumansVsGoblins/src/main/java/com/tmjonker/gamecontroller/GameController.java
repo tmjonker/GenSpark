@@ -1,4 +1,9 @@
-package com.tmjonker;
+package com.tmjonker.gamecontroller;
+
+import com.tmjonker.battlehandler.BattleHandler;
+import com.tmjonker.humanoid.Human;
+import com.tmjonker.land.Land;
+import com.tmjonker.treasure.Treasure;
 
 import java.util.Scanner;
 
@@ -35,6 +40,7 @@ public class GameController {
         System.out.println("\nYour position is marked on the map with an H.");
         System.out.println("Goblins are marked on the map with a G.");
         System.out.println("Treasure is marked on the map with a T.");
+        System.out.println("Potions are marked on the map with a P.");
     }
 
     private void promptForDirection() {
@@ -59,44 +65,66 @@ public class GameController {
 
             char interactionEncountered = movePlayer(userInput);
 
-            if (interactionEncountered == 'G') {
-                land.printGrid();
-                System.out.println("\nYou have encountered a goblin!");
-                System.out.println("Let the battle commence!\n");
+            switch (interactionEncountered) {
+                case 'G' -> {
+                    land.printGrid();
+                    System.out.println("\nYou have encountered a goblin!");
+                    System.out.println("Let the battle commence!\n");
 
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    battleHandler.commenceBattle(player);
+                    land.printGrid();
+                    userInput = ""; // resets user input to restart the loop.
                 }
 
-                battleHandler.commenceBattle(player);
-                land.printGrid();
-                userInput = ""; // resets user input to restart the loop.
-            } else if (interactionEncountered == 'T') {
-                land.printGrid();
-                System.out.println("\nYou have found a treasure chest!");
-                System.out.println("Let's see what's inside...\n");
+                case 'T' -> {
+                    land.printGrid();
+                    System.out.println("\nYou have found a treasure chest!");
+                    System.out.println("Let's see what's inside...\n");
 
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    new Treasure().collectTreasure(player);
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    land.printGrid();
+                    userInput = ""; // resets user input to restart the loop.
                 }
 
-                new Treasure().collectTreasure(player);
+                case 'P' -> {
+                    land.printGrid();
+                    player.setHealth(100);
+                    System.out.println("\nYou have found a POTION!");
+                    System.out.println("You health has increased to " + player.getHealth() + "!\n");
 
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    land.printGrid();
+                    userInput = ""; // resets user input to restart the loop.
                 }
 
-                land.printGrid();
-                userInput = ""; // resets user input to restart the loop.
-            } else {
-                land.printGrid();
-                userInput = ""; // resets user input to restart the loop.
+                default -> {
+                    land.printGrid();
+                    userInput = ""; // resets user input to restart the loop.
+                }
             }
         }
     }

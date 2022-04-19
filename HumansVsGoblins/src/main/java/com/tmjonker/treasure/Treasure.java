@@ -1,4 +1,6 @@
-package com.tmjonker;
+package com.tmjonker.treasure;
+
+import com.tmjonker.humanoid.Human;
 
 public class Treasure {
 

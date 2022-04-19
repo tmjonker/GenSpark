@@ -1,5 +1,7 @@
 package com.tmjonker;
 
+import com.tmjonker.humanoid.Goblin;
+import com.tmjonker.humanoid.Human;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

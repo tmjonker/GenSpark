@@ -1,4 +1,4 @@
-package com.tmjonker;
+package com.tmjonker.land;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +31,7 @@ public class Land {
 
         generateGoblinLocations(); // Adds goblins to the starting map.
         generateTreasureLocations(); // Adds treasure chests to the starting map.
+        generatePotionLocations(); // Adds potions to the map.
         generateHumanStartingLocation(); // Adds human to the starting map.
     }
 
@@ -58,6 +59,19 @@ public class Land {
                 i--;
             } else {
                 grid[row][column] = 'T';
+            }
+        }
+    }
+
+    private void generatePotionLocations() {
+        for (int i = 0; i < 3; i++) {
+            int row = (int) (Math.random() * ROWS);
+            int column = (int) (Math.random() * COLUMNS);
+
+            if (grid[row][column] == 'G' || grid[row][column] == 'T' || grid[row][column] == 'P') {
+                i--;
+            } else {
+                grid[row][column] = 'P';
             }
         }
     }
@@ -95,7 +109,7 @@ public class Land {
 
         char interactionEncountered = 'N'; // Default is N, which stands for Nothing.
 
-        if (grid[endX][endY] == 'T' || grid[endX][endY] == 'G')
+        if (grid[endX][endY] == 'T' || grid[endX][endY] == 'G' || grid[endX][endY] == 'P')
             interactionEncountered = grid[endX][endY];
 
         grid[endX][endY] = 'H';
