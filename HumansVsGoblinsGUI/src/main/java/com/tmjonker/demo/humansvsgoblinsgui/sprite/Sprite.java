@@ -11,30 +11,29 @@ import java.util.List;
 
 public abstract class Sprite {
 
-    Image image;
-    List<Image> images;
-    ImageView imageView;
-    Transition animation;
+    protected Image image;
+    protected List<Image> images;
+    protected ImageView imageView;
+    protected Transition animation;
 
-    Pane layer;
+    protected Pane layer;
 
-    double x;
-    double y;
-    double r;
+    protected double x;
+    protected double y;
+    protected double r;
 
-    double dx;
-    double dy;
-    double dr;
+    protected double dx;
+    protected double dy;
 
-    boolean removable = false;
+    protected boolean removable = false;
 
-    double w;
-    double h;
+    protected double w;
+    protected double h;
 
-    boolean canMove = true;
+    protected boolean canMove = true;
 
-    double health;
-    double damage;
+    protected double health;
+    protected double damage;
 
     public Sprite(Pane layer, Image image, List<Image> images, double x, double y, double dx,
                   double dy, double health, double damage) {
@@ -120,7 +119,6 @@ public abstract class Sprite {
 
         x += dx;
         y += dy;
-        r += dr;
     }
 
     // moves character image to the new x and y coordinates so that the character can move around the screen.

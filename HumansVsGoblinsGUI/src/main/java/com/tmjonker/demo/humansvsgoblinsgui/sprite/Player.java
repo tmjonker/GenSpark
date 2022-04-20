@@ -47,7 +47,7 @@ public class Player extends Sprite {
         } else if( input.isMoveDown()) {
             dy = speed;
         } else {
-            dy = 0d;
+            dy = 0;
         }
 
         // horizontal direction
@@ -56,7 +56,7 @@ public class Player extends Sprite {
         } else if( input.isMoveRight()) {
             dx = speed;
         } else {
-            dx = 0d;
+            dx = 0;
         }
     }
 
@@ -93,6 +93,6 @@ public class Player extends Sprite {
 
     // Increased player health back to 100% capacity if a potion is collided with.
     public void drinkPotion() {
-        health = Settings.PLAYER_HEALTH;
+        health += Settings.PLAYER_HEALTH;
     }
 }

@@ -50,6 +50,7 @@ public class Game {
     private List<Potion> potions = new ArrayList<>();
     private Enemy enemy;
     private Player player;
+    private int numEnemies = 8;
 
     private Input input;
 
@@ -125,14 +126,14 @@ public class Game {
         createScoreLayer();
         createPlayers();
 
-        // generates 15 enemies randomly on the map.
-        for (int i = 0; i < 15; i++) {
-            spawnEnemies();
-        }
-
         // generates 5 potions randomly on the map.
         for (int i = 0; i < 5; i++) {
             spawnPotions();
+        }
+
+        // generates 15 enemies randomly on the map.
+        for (int i = 0; i < numEnemies; i++) {
+            spawnEnemies();
         }
 
         // The main game loop that is responsible for all the gameplay and animation.
@@ -153,6 +154,7 @@ public class Game {
 
                 // processes input to detect key presses.
                 player.processInput();
+                enemies.forEach(enemy -> enemy.changeDirection());
 
                 // updates x and y coordinate of player sprite based on key presses.
                 player.move();
@@ -165,6 +167,7 @@ public class Game {
 
                 // moves the player sprite across the screen based on changes to x and y from .move().
                 player.updateUI();
+                enemies.forEach(enemy -> enemy.updateUI());
 
                 // if enemies have been defeated, then they are triggered for removal and then removed from the map.
                 removeSprites(enemies);
@@ -198,7 +201,9 @@ public class Game {
     // spawns new enemies and potions after player has cleared a level.
     private void resetRound() {
 
-        for (int i = 0; i < 15; i++) {
+        numEnemies++;
+
+        for (int i = 0; i < numEnemies; i++) {
             spawnEnemies();
         }
 
@@ -328,7 +333,7 @@ public class Game {
         double damage = (rnd.nextDouble() * Settings.MIN_ENEMY_DAMAGE) + Settings.MIN_ENEMY_DAMAGE;
 
         // create a sprite
-        Enemy enemy = new Enemy(playfieldLayer, enemyImage, trollImages, x, y, 0, 0, health, damage);
+        Enemy enemy = new Enemy(playfieldLayer, enemyImage, trollImages, x, y, Settings.ENEMY_SPEED, 0, health, damage);
 
         // manage sprite
         enemies.add(enemy);
