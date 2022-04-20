@@ -51,7 +51,7 @@ public class GameController {
     // Main game loop
     private void gameLoop() {
         String userInput = "";
-        while (!userInput.equals("Q") && !userInput.equals("q")) {
+        while (true) {
             while (!userInput.matches("[nNsSeEwWqQ]")) {
                 promptForDirection();
                 try {
@@ -63,6 +63,9 @@ public class GameController {
                 }
             }
 
+            if (userInput.equals("q"))
+                break;
+
             char interactionEncountered = movePlayer(userInput);
 
             switch (interactionEncountered) {
@@ -71,14 +74,17 @@ public class GameController {
                     System.out.println("\nYou have encountered a goblin!");
                     System.out.println("Let the battle commence!\n");
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sleep();
 
                     battleHandler.commenceBattle(player);
-                    land.printGrid();
+                    if (!land.printGrid()) {
+
+                        sleep();
+
+                        System.out.println("\nCongratulations, " + player.getName() + ", you have beaten the game by defeating all goblins!");
+                        System.exit(0);
+                    }
+
                     userInput = ""; // resets user input to restart the loop.
                 }
 
@@ -87,19 +93,11 @@ public class GameController {
                     System.out.println("\nYou have found a treasure chest!");
                     System.out.println("Let's see what's inside...\n");
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sleep();
 
                     new Treasure().collectTreasure(player);
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sleep();
 
                     land.printGrid();
                     userInput = ""; // resets user input to restart the loop.
@@ -111,21 +109,27 @@ public class GameController {
                     System.out.println("\nYou have found a POTION!");
                     System.out.println("You health has increased to " + player.getHealth() + "!\n");
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sleep();
 
                     land.printGrid();
                     userInput = ""; // resets user input to restart the loop.
                 }
 
-                default -> {
+                case 'N' -> {
                     land.printGrid();
                     userInput = ""; // resets user input to restart the loop.
                 }
             }
+        }
+    }
+
+    // Delays printing to console by 2 seconds.
+    private void sleep() {
+
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

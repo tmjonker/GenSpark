@@ -11,6 +11,7 @@ public class Land {
 
     private final char[][] grid;
     private final HashMap<String, Integer> humanLocation;
+    private int numGoblins = 10;
 
     public Land() {
 
@@ -38,7 +39,7 @@ public class Land {
     // Determines random starting locations for Goblins.
     private void generateGoblinLocations() {
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numGoblins; i++) {
             int row = (int) (Math.random() * ROWS);
             int column = (int) (Math.random() * COLUMNS);
             if (grid[row][column] == 'G')
@@ -92,7 +93,9 @@ public class Land {
         }
     }
 
-    public void printGrid() {
+    // prints the game grid/map to console.  returns TRUE if goblins are still alive on map, FALSE if all goblins have
+    // been cleared.
+    public boolean printGrid() {
         System.out.println();
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
@@ -102,6 +105,8 @@ public class Land {
                     System.out.print(grid[i][j] + "  ");
             }
         }
+
+        return goblinsStillAlive();
     }
 
     //Update human location. Return TRUE is goblin is encountered, return FALSE if no goblin has been encountered.
@@ -118,6 +123,23 @@ public class Land {
         humanLocation.replace("y", startY, endY);
 
         return interactionEncountered;
+    }
+
+    public boolean goblinsStillAlive() {
+
+        boolean goblinsAlive = false;
+
+        outer:
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                if (grid[i][j] == 'G') {
+                    goblinsAlive = true;
+                    break outer;
+                }
+            }
+        }
+
+        return goblinsAlive;
     }
 
     public HashMap<String, Integer> getHumanLocation() {
