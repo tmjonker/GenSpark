@@ -18,6 +18,10 @@ public class Land {
         humanLocation = new HashMap<>();
         grid = new char[ROWS][COLUMNS];
         createDefaultGrid();
+        generateGoblinLocations(); // Adds goblins to the starting map.
+        generateTreasureLocations(); // Adds treasure chests to the starting map.
+        generatePotionLocations(); // Adds potions to the map.
+        generateHumanStartingLocation(); // Adds human to the starting map.
         printGrid();
     }
 
@@ -29,11 +33,6 @@ public class Land {
                 grid[i][j] = '~';
             }
         }
-
-        generateGoblinLocations(); // Adds goblins to the starting map.
-        generateTreasureLocations(); // Adds treasure chests to the starting map.
-        generatePotionLocations(); // Adds potions to the map.
-        generateHumanStartingLocation(); // Adds human to the starting map.
     }
 
     // Determines random starting locations for Goblins.
