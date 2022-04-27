@@ -49,6 +49,11 @@ public class Land {
         }
     }
 
+    public void addGoblin(int[] coordinates) {
+
+        grid[coordinates[0]][coordinates[1]] = 'G';
+    }
+
     private void generateTreasureLocations() {
 
         for (int i = 0; i < 10; i++) {
@@ -108,7 +113,8 @@ public class Land {
         return goblinsStillAlive();
     }
 
-    //Update human location. Return TRUE is goblin is encountered, return FALSE if no goblin has been encountered.
+    //Update human location. Return TRUE is goblin, potion, or treasure is encountered, return FALSE if no goblin
+    // has been encountered.
     public char updateHumanLocation(int startX, int startY, int endX, int endY) {
 
         char interactionEncountered = 'N'; // Default is N, which stands for Nothing.
@@ -124,6 +130,17 @@ public class Land {
         return interactionEncountered;
     }
 
+    // overloaded method to move player based on simple x and y coordinates.  used to return player to previous known location
+    // so map checks are not necessary.
+    public void updateHumanLocation(int x, int y) {
+
+        grid[x][y] = 'H';
+
+        humanLocation.replace("x", x);
+        humanLocation.replace("y", y);
+    }
+
+    // checks entire map to see if there are any goblins still alive.
     public boolean goblinsStillAlive() {
 
         boolean goblinsAlive = false;
@@ -141,6 +158,7 @@ public class Land {
         return goblinsAlive;
     }
 
+    // returns human location on map.
     public HashMap<String, Integer> getHumanLocation() {
         return humanLocation;
     }

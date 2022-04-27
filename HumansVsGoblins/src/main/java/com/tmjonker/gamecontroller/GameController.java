@@ -58,8 +58,8 @@ public class GameController {
                     userInput = scanner.nextLine().toLowerCase();
                 } catch (Exception e) {
                     userInput = "q";
-                    System.out.println("Invalid input.  Game will now restart.");
-                    startGame();
+                    System.out.println("Invalid input.  Game will now exit.");
+                    System.exit(0);
                 }
             }
 
@@ -76,8 +76,16 @@ public class GameController {
 
                     sleep();
 
-                    // if 'G', then battle commences.
-                    battleHandler.commenceBattle(player);
+                    // returns an int[] array containing goblin coordinates if player decides to flee.
+                    // if player does not flee, then it returns null.
+                    int[] coordinates = battleHandler.commenceBattle(player);
+
+                    // if coordinates != null then the goblin is added back onto the map and player is moved to
+                    // previous known location.
+                    if (coordinates != null) {
+                        land.addGoblin(coordinates);
+                        movePlayer(player.getPx(), player.getPy());
+                    }
 
                     if (!land.printGrid()) {
 
@@ -144,28 +152,28 @@ public class GameController {
         // or T for treasure.
 
         switch (direction) {
-            case "n" -> {
+            case "n" -> { // moves player north on map.
                 if (x-1 >= 0) {
                     collision = land.updateHumanLocation(x, y, x-1, y);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
-            case "s" -> {
+            case "s" -> { // moves player south on map.
                 if (x+1 < 11) {
                     collision = land.updateHumanLocation(x, y, x+1, y);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
-            case "e" -> {
+            case "e" -> { // moves player east on map.
                 if (y+1 < 11) {
                     collision = land.updateHumanLocation(x, y, x, y+1);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
-            case "w" -> {
+            case "w" -> { // moves player west on map.
                 if (y-1 >= 0) {
                     collision = land.updateHumanLocation(x, y, x, y-1);
                     player.setX(land.getHumanLocation().get("x"));
@@ -175,6 +183,14 @@ public class GameController {
         }
 
         return collision;
+    }
+
+    // overloaded method to move player to a new location based on x and y inputs.
+    private void movePlayer(int x, int y) {
+
+        land.updateHumanLocation(x, y);
+        player.setX(x);
+        player.setY(y);
     }
 
     // Generates a new human player.
@@ -194,6 +210,4 @@ public class GameController {
         }
         return new Human(name);
     }
-
-
 }

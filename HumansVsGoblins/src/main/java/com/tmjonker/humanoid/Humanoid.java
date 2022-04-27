@@ -7,9 +7,11 @@ public abstract class Humanoid {
     protected String name;
     protected int health;
     protected int damage;
-    private int x;
-    private int y;
-    private int[] coordinates = new int[2];
+    private int x = 0;
+    private int y = 0;
+    private int px;
+    private int py;
+
 
     public Humanoid(String name, int health, int damage) {
         this.name = name;
@@ -35,18 +37,25 @@ public abstract class Humanoid {
     }
 
     public void setX(int x) {
+
+        px = this.x;
+
         this.x = x;
-        coordinates[0] = x;
     }
 
     public void setY(int y) {
+
+        py = this.y;
+
         this.y = y;
-        coordinates[1] = x;
     }
 
-    public int[] getCoordinates() {
+    public int getPx() {
+        return px;
+    }
 
-        return coordinates;
+    public int getPy() {
+        return py;
     }
 
     public void setHealth(int health) {

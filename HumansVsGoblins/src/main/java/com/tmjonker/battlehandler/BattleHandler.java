@@ -19,7 +19,7 @@ public class BattleHandler {
     }
 
     // Contains all the battle logic.
-    public void commenceBattle(Human player) {
+    public int[] commenceBattle(Human player) {
 
         Goblin goblin = new Goblin();
         goblin.setX(player.getX());
@@ -108,9 +108,13 @@ public class BattleHandler {
 
                 GameController.sleep();
 
-                break;
+                int[] goblinCoordinates = {goblin.getX(), goblin.getY()};
+
+                return goblinCoordinates;
             }
         }
+
+        return null;
     }
 
     // Prompts user to choose whether or not they want to flee battle or continue to fight.
