@@ -76,7 +76,9 @@ public class GameController {
 
                     sleep();
 
+                    // if 'G', then battle commences.
                     battleHandler.commenceBattle(player);
+
                     if (!land.printGrid()) {
 
                         sleep();
@@ -124,7 +126,7 @@ public class GameController {
     }
 
     // Delays printing to console by 2 seconds.
-    private void sleep() {
+    public static void sleep() {
 
         try {
             Thread.sleep(2000);
@@ -138,40 +140,41 @@ public class GameController {
 
         int x = player.getX();
         int y = player.getY();
-        char battle = 'N'; // defaults to 'N' which stands for NOTHING.
+        char collision = 'N'; // defaults to 'N' which stands for NOTHING. Returns P for potion, G for goblin,
+        // or T for treasure.
 
         switch (direction) {
             case "n" -> {
                 if (x-1 >= 0) {
-                    battle = land.updateHumanLocation(x, y, x-1, y);
+                    collision = land.updateHumanLocation(x, y, x-1, y);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
             case "s" -> {
                 if (x+1 < 11) {
-                    battle = land.updateHumanLocation(x, y, x+1, y);
+                    collision = land.updateHumanLocation(x, y, x+1, y);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
             case "e" -> {
                 if (y+1 < 11) {
-                    battle = land.updateHumanLocation(x, y, x, y+1);
+                    collision = land.updateHumanLocation(x, y, x, y+1);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
             case "w" -> {
                 if (y-1 >= 0) {
-                    battle = land.updateHumanLocation(x, y, x, y-1);
+                    collision = land.updateHumanLocation(x, y, x, y-1);
                     player.setX(land.getHumanLocation().get("x"));
                     player.setY(land.getHumanLocation().get("y"));
                 }
             }
         }
 
-        return battle;
+        return collision;
     }
 
     // Generates a new human player.
@@ -191,4 +194,6 @@ public class GameController {
         }
         return new Human(name);
     }
+
+
 }
