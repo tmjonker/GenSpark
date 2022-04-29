@@ -362,7 +362,7 @@ public class Game {
                 collisionPotion = true;
                 player.drinkPotion();
                 potion.setRemovable(true);
-                commentary.appendText("\nYou drink a potion and gain " + Settings.PLAYER_HEALTH + " health!");
+                commentary.appendText("\nYou drink a potion and gain " + (int) Settings.PLAYER_HEALTH + " health!");
             }
         }
     }
