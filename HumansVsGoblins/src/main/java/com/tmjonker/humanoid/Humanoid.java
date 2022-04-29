@@ -9,16 +9,18 @@ public abstract class Humanoid {
     protected int damage;
     private int x = 0;
     private int y = 0;
-    private int px;
-    private int py;
+    private int px; // previous x position
+    private int py; // previous y position
 
 
+    // primarily used for human generation
     public Humanoid(String name, int health, int damage) {
         this.name = name;
         this.health = health;
         this.damage = damage;
     }
 
+    // primarily used for goblin creation.
     public Humanoid(int health, int damage) {
         RandomNameGenerator rng = new RandomNameGenerator();
         name = rng.next();
@@ -36,6 +38,7 @@ public abstract class Humanoid {
         return y;
     }
 
+    // assigns previous x position to px before assigning new x positiion.
     public void setX(int x) {
 
         px = this.x;
@@ -43,6 +46,7 @@ public abstract class Humanoid {
         this.x = x;
     }
 
+    // assigns previous y position to py before assigning new y position.
     public void setY(int y) {
 
         py = this.y;

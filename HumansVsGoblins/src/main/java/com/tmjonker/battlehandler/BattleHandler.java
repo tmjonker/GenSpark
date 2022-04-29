@@ -46,14 +46,14 @@ public class BattleHandler {
                     System.out.println("You deal " + damageDealt + " damage to " + goblin.getName() + ".");
                     System.out.println(goblin.getName() + " has " + goblin.getHealth() + " health remaining.\n");
 
-                    GameController.sleep();
+                    GameController.sleep(2000);
                     // if hitPercentage < the minimum hit percentage then the hit fails.
                 } else {
                     System.out.println("\nYou try to attack " + goblin.getName() + ".");
                     System.out.println("but you MISS!");
                     System.out.println(goblin.getName() + " rejoices.\n");
 
-                    GameController.sleep();
+                    GameController.sleep(2000);
 
                 }
 
@@ -70,14 +70,14 @@ public class BattleHandler {
                     System.out.println("They deal " + damageDealt + " damage to you.");
                     System.out.println("You have " + player.getHealth() + " health remaining.\n");
 
-                    GameController.sleep();
+                    GameController.sleep(2000);
                     // if the goblin hitPercentage < the goblin minimum hit percentage, then the attack fails.
                 } else {
                     System.out.println("\n" + goblin.getName() + " tries to attack you, ");
                     System.out.println("but they MISS!");
                     System.out.println("You rejoice!\n");
 
-                    GameController.sleep();
+                    GameController.sleep(2000);
 
                 }
             }
@@ -87,7 +87,7 @@ public class BattleHandler {
                 System.out.println("You have fought valiantly, but you have died!");
                 System.out.println("Game Over...");
 
-                GameController.sleep();
+                GameController.sleep(2000);
 
                 System.exit(0); // Ends game if player dies.
 
@@ -96,7 +96,7 @@ public class BattleHandler {
                 System.out.println("You ruthlessly slaughtered " + goblin.getName() + ", ");
                 System.out.println("You step over their lifeless corpse to continue your journey.");
 
-                GameController.sleep();
+                GameController.sleep(2000);
 
                 break;
             }
@@ -106,7 +106,7 @@ public class BattleHandler {
                 System.out.println("You turn and run away.");
                 System.out.println(player.getName() + " lives to fight another day!\n");
 
-                GameController.sleep();
+                GameController.sleep(2000);
 
                 int[] goblinCoordinates = {goblin.getX(), goblin.getY()};
 

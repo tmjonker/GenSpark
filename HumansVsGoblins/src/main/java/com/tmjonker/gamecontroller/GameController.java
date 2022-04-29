@@ -23,11 +23,11 @@ public class GameController {
         scanner = new Scanner(System.in);
         showTitleScreen();
         player = generateHuman();
+        showInstructions();
         land = new Land();
         battleHandler = new BattleHandler(scanner);
         player.setX(land.getHumanLocation().get("x"));
         player.setY(land.getHumanLocation().get("y"));
-        showInstructions();
         gameLoop();
     }
 
@@ -49,10 +49,13 @@ public class GameController {
     }
 
     private void showInstructions() {
-        System.out.println("\nYour position is marked on the map with an H.");
+        System.out.println("\nLet's get ready to slay some goblins!");
+        System.out.println("Your goal is to eliminate all goblins on the map.\n");
+        System.out.println("Your position is marked on the map with an H.");
         System.out.println("Goblins are marked on the map with a G.");
         System.out.println("Treasure is marked on the map with a T.");
         System.out.println("Potions are marked on the map with a P.");
+        sleep(10000);
     }
 
     private void promptForDirection() {
@@ -86,7 +89,7 @@ public class GameController {
                     System.out.println("\nYou have encountered a goblin!");
                     System.out.println("Let the battle commence!\n");
 
-                    sleep();
+                    sleep(2000);
 
                     // returns an int[] array containing goblin coordinates if player decides to flee.
                     // if player does not flee, then it returns null.
@@ -101,7 +104,7 @@ public class GameController {
 
                     if (!land.printGrid()) {
 
-                        sleep();
+                        sleep(2000);
 
                         System.out.println("\nCongratulations, " + player.getName() + ", you have beaten the game by defeating all goblins!");
                         System.exit(0);
@@ -115,11 +118,11 @@ public class GameController {
                     System.out.println("\nYou have found a treasure chest!");
                     System.out.println("Let's see what's inside...\n");
 
-                    sleep();
+                    sleep(2000);
 
                     new Treasure().collectTreasure(player);
 
-                    sleep();
+                    sleep(2000);
 
                     land.printGrid();
                     userInput = ""; // resets user input to restart the loop.
@@ -131,7 +134,7 @@ public class GameController {
                     System.out.println("\nYou have found a POTION!");
                     System.out.println("You health has increased to " + player.getHealth() + "!\n");
 
-                    sleep();
+                    sleep(2000);
 
                     land.printGrid();
                     userInput = ""; // resets user input to restart the loop.
@@ -146,10 +149,10 @@ public class GameController {
     }
 
     // Delays printing to console by 2 seconds.
-    public static void sleep() {
+    public static void sleep(int millis) {
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(millis);
         } catch (Exception e) {
             e.printStackTrace();
         }
