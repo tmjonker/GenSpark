@@ -1,14 +1,14 @@
 package com.tmjonker;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LetterField {
 
 
     private final String word;
 
-    private final HashMap<Integer, Integer> letterMap = new HashMap<>();
+    private final ArrayList<String> letterList = new ArrayList<>();
 
     // Contains all the code pertaining to the letter field that populates guesses and matched letters.
     public LetterField(String word) {
@@ -19,54 +19,60 @@ public class LetterField {
 
     public void drawLetterField() {
 
-        int numberOfDashes = word.length();
-
-        for (int i = 0; i < numberOfDashes; i++) {
-            if (i == numberOfDashes - 1)
+        word.chars().mapToObj(c -> (char) c).forEach((c) -> {
+            if (c == word.charAt(word.length() - 1))
                 System.out.println("_\n");
             else
                 System.out.print("_");
-        }
+        });
+
         System.out.println("Guess a letter!");
     }
 
     public void updateLetterField() {
 
-        for (int i = 0; i < word.length(); i++) {
-            if (letterMap.containsKey(i)) {
-                System.out.print(word.substring(i, i+1));
-            } else {
+        word.chars().mapToObj(c -> (char) c).forEach(c -> {
+            String character = Character.toString(c);
+
+            if (letterList.contains(character))
+                System.out.print(character);
+            else
                 System.out.print("_");
-            }
-        }
+        });
     }
 
     public boolean updateLetterField(String guess) {
 
-        for (int i = 0; i < word.length(); i++) {
-            String subString = word.substring(i, i+1);
-            if (subString.equals(guess)) {
-                if (!letterMap.containsKey(i))
-                    letterMap.put(i, i+1);
+        AtomicBoolean trueFalse = new AtomicBoolean(true);
+
+        word.chars().mapToObj(c -> (char) c).forEach(c -> {
+            String character = Character.toString(c);
+
+            if (character.equals(guess))
+                if (!letterList.contains(character))
+                    letterList.add(character);
                 else {
-                    System.out.println("You have already guess that letter. Choose again.");
-                    return false;
+                    System.out.println("You have already guessed that letter. Choose again.");
+                    trueFalse.set(false);
                 }
-            }
-        }
+        });
 
-        for (int i = 0; i < word.length(); i++) {
-            if (letterMap.containsKey(i)) {
-                System.out.print(word.charAt(i));
-            } else {
+        if (!trueFalse.get())
+            return false;
+
+        word.chars().mapToObj(c -> (char) c).forEach(c -> {
+            String character = Character.toString(c);
+
+            if (letterList.contains(character))
+                System.out.print(character);
+            else
                 System.out.print("_");
-            }
-        }
+        });
 
-        if (letterMap.size() != word.length())
+        if (letterList.size() != word.length())
             System.out.println("\n\nGuess a letter!");
 
-        return letterMap.size() == word.length();
+        return letterList.size() == word.length();
     }
 
     public String getWord() {
