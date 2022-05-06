@@ -115,9 +115,7 @@ public class HangMan {
                     case 1 -> {
                         gallowsDrawer.drawHead();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters(); // write out the missed letters on the screen.
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -125,9 +123,7 @@ public class HangMan {
                     case 2 -> {
                         gallowsDrawer.drawChest();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -135,9 +131,7 @@ public class HangMan {
                     case 3 -> {
                         gallowsDrawer.drawRightArm();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -145,9 +139,7 @@ public class HangMan {
                     case 4 -> {
                         gallowsDrawer.drawLeftArm();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -155,9 +147,7 @@ public class HangMan {
                     case 5 -> {
                         gallowsDrawer.drawGroin();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -165,9 +155,7 @@ public class HangMan {
                     case 6 -> {
                         gallowsDrawer.drawRightLeg();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nGuess a letter!");
@@ -175,9 +163,7 @@ public class HangMan {
                     case 7 -> {
                         gallowsDrawer.drawLeftLeg();
                         System.out.print("Missed Letters: ");
-                        for (String missedLetter : missedLetters) {
-                            System.out.print(missedLetter + " ");
-                        }
+                        updateMissedLetters();
                         System.out.println("\n");
                         letterField.updateLetterField();
                         System.out.println("\n\nYou lose!  The man has been hung.");
@@ -191,6 +177,12 @@ public class HangMan {
         } else { // if game word contains the guess then update the letter field and check to see if player has won the game.
             return letterField.updateLetterField(guess);
         }
+    }
+
+    // write out the missed letters on the screen.
+    private void updateMissedLetters() {
+
+        missedLetters.stream().map(ml -> ml).forEach(missedLetter -> System.out.print(missedLetter + " "));
     }
 
     public int getNumberOfGuesses() {
