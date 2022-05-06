@@ -47,6 +47,7 @@ public class HangMan {
         letterField.drawLetterField();
     }
 
+    // victory method that declares the player to be a winner.
     public void victory() {
 
         numberOfWins++;
