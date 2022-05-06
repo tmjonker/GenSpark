@@ -182,7 +182,7 @@ public class HangMan {
     // write out the missed letters on the screen.
     private void updateMissedLetters() {
 
-        missedLetters.stream().map(ml -> ml).forEach(missedLetter -> System.out.print(missedLetter + " "));
+        missedLetters.forEach(missedLetter -> System.out.print(missedLetter + " "));
     }
 
     public int getNumberOfGuesses() {
