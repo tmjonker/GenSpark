@@ -41,37 +41,28 @@ public class LetterField {
         });
     }
 
+    // updates the letter field underneath the gallows indicating correct guesses.
     public boolean updateLetterField(String guess) {
 
-        AtomicBoolean trueFalse = new AtomicBoolean(true);
+        if (!letterList.contains(guess)) {
+            word.chars().mapToObj(c -> (char) c).forEach(c -> {
+                String character = Character.toString(c);
 
-        word.chars().mapToObj(c -> (char) c).forEach(c -> {
-            String character = Character.toString(c);
-
-            if (character.equals(guess))
-                if (!letterList.contains(character))
-                    letterList.add(character);
-                else {
-                    System.out.println("You have already guessed that letter. Choose again.");
-                    trueFalse.set(false);
-                }
-        });
-
-        if (!trueFalse.get())
+                if (character.equals(guess))
+                    letterList.add(guess);
+            });
+        } else {
+            System.out.println("You have already guessed that letter!  Try again.");
             return false;
+        }
 
-        word.chars().mapToObj(c -> (char) c).forEach(c -> {
-            String character = Character.toString(c);
-
-            if (letterList.contains(character))
-                System.out.print(character);
-            else
-                System.out.print("_");
-        });
+        // if letterList contains any of the characters from the word, add them to the letter field under gallows.
+        updateLetterField();
 
         if (letterList.size() != word.length())
             System.out.println("\n\nGuess a letter!");
 
+        // if letterList.size() == word.length() then player has guessed all the letters of the word and true is returned.
         return letterList.size() == word.length();
     }
 

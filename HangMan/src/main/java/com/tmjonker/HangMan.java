@@ -67,7 +67,7 @@ public class HangMan {
         String highScoreFileString = "";
         try {
             // Change path to reflect the Absolute path for your highscore.txt file.
-            File highScoreFile = new File("/home/tim/Projects/GenSpark/HangMan/src/main/resources/highscore.txt");
+            File highScoreFile = new File("src/main/resources/highscore.txt");
             FileWriter fileWriter = new FileWriter(highScoreFile, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(name + "-" + numberOfWins + "/");
@@ -77,7 +77,7 @@ public class HangMan {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        // split high score string by / character to separate score entries in file.
         String[] highScores = highScoreFileString.split("/");
         List<String> list = Arrays.stream(highScores)
                 .filter(s -> Integer.parseInt(s.substring(s.indexOf("-") + 1, s.length())) >= numberOfWins).toList();
@@ -106,85 +106,89 @@ public class HangMan {
     // Updates hangman drawing based on quality of player's guess.
     public boolean updateHangMan(String guess) {
 
-        if (!word.contains(guess)) {
+        if (!word.contains(guess)) { //if game word does not contain guess.
 
-            if (!missedLetters.contains(guess))
-                missedLetters.add(guess);
+            if (!missedLetters.contains(guess)) { // If user hasn't made this guess yet, then add it to missedLetters
+                missedLetters.add(guess);         // & update hangman art
 
-            switch (++numberOfGuesses) {
-                case 1 -> {
-                    gallowsDrawer.drawHead();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                switch (++numberOfGuesses) {
+                    case 1 -> {
+                        gallowsDrawer.drawHead();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 2 -> {
-                    gallowsDrawer.drawChest();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 2 -> {
+                        gallowsDrawer.drawChest();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 3 -> {
-                    gallowsDrawer.drawRightArm();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 3 -> {
+                        gallowsDrawer.drawRightArm();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 4 -> {
-                    gallowsDrawer.drawLeftArm();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 4 -> {
+                        gallowsDrawer.drawLeftArm();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 5 -> {
-                    gallowsDrawer.drawGroin();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 5 -> {
+                        gallowsDrawer.drawGroin();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 6 -> {
-                    gallowsDrawer.drawRightLeg();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 6 -> {
+                        gallowsDrawer.drawRightLeg();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nGuess a letter!");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nGuess a letter!");
-                }
-                case 7 -> {
-                    gallowsDrawer.drawLeftLeg();
-                    System.out.print("Missed Letters: ");
-                    for (String missedLetter : missedLetters) {
-                        System.out.print(missedLetter + " ");
+                    case 7 -> {
+                        gallowsDrawer.drawLeftLeg();
+                        System.out.print("Missed Letters: ");
+                        for (String missedLetter : missedLetters) {
+                            System.out.print(missedLetter + " ");
+                        }
+                        System.out.println("\n");
+                        letterField.updateLetterField();
+                        System.out.println("\n\nYou lose!  The man has been hung.");
+                        System.out.println("The secret word was " + word + ".");
                     }
-                    System.out.println("\n");
-                    letterField.updateLetterField();
-                    System.out.println("\n\nYou lose!  The man has been hung.");
                 }
+            } else { // if user has already made this guess, then prompt the user to try again.
+                System.out.println("You have already guessed that letter!  Try again.");
             }
-            return false;
-        } else {
+            return false; // false, indicating that the game hasn't been won.
+        } else { // if game word contains the guess then update the letter field and check to see if player has won the game.
             return letterField.updateLetterField(guess);
         }
     }
