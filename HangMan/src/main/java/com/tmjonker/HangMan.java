@@ -10,20 +10,20 @@ import java.util.*;
 // Main game class.. contains most of the base game logic.
 public class HangMan {
 
-    private GallowsDrawer gallowsDrawer;
-    private LetterField letterField;
-    private WordGenerator wordGenerator;
-    private int numberOfGuesses;
-    private ArrayList<String> missedLetters = new ArrayList<>();
-    private int numberOfWins = 0;
-    private String name = "";
-    private String word = "";
+    private static GallowsDrawer gallowsDrawer;
+    private static LetterField letterField;
+    private static WordGenerator wordGenerator;
+    private static int numberOfGuesses;
+    private static ArrayList<String> missedLetters = new ArrayList<>();
+    private static int numberOfWins = 0;
+    private static String name = "";
+    private static String word = "";
 
     public HangMan() {
 
     }
 
-    public void startGame() {
+    public static void startGame() {
 
         gallowsDrawer = new GallowsDrawer();
         wordGenerator = new WordGenerator();
@@ -35,7 +35,7 @@ public class HangMan {
         letterField.drawLetterField();
     }
 
-    public void startGame(ArrayList<String> wordList) {
+    public static void startGame(ArrayList<String> wordList) {
 
         gallowsDrawer = new GallowsDrawer();
         wordGenerator = new WordGenerator(wordList);
@@ -48,7 +48,7 @@ public class HangMan {
     }
 
     // victory method that declares the player to be a winner.
-    public void victory() {
+    public static void victory() {
 
         numberOfWins++;
         System.out.println("\n\nYes! The secret word is \"" + word + "\"! you have won!");
@@ -63,7 +63,7 @@ public class HangMan {
     }
 
     // Loads High Score file, writes score to high score list, and reads and sorts the high score list.
-    private void addCheckHighScore() {
+    private static void addCheckHighScore() {
 
         String highScoreFileString = "";
         try {
@@ -105,7 +105,7 @@ public class HangMan {
         }
     }
     // Updates hangman drawing based on quality of player's guess.
-    public boolean updateHangMan(String guess) {
+    public static boolean updateHangMan(String guess) {
 
         if (!word.contains(guess)) { //if game word does not contain guess.
 
@@ -181,16 +181,16 @@ public class HangMan {
     }
 
     // write out the missed letters on the screen.
-    private void updateMissedLetters() {
+    private static void updateMissedLetters() {
 
         missedLetters.forEach(missedLetter -> System.out.print(missedLetter + " "));
     }
 
-    public int getNumberOfGuesses() {
+    public static int getNumberOfGuesses() {
         return numberOfGuesses;
     }
 
-    public String getWord() {
+    public static String getWord() {
         return word;
     }
 }

@@ -10,25 +10,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HangManTest {
 
-    HangMan hangMan;
-
 
     @BeforeEach
     void setUp() {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("dog");
-        hangMan = new HangMan();
-        hangMan.startGame(arrayList);
+        HangMan.startGame(arrayList);
     }
 
     @Test
     void getWord() {
-        assertEquals("dog", hangMan.getWord(), "Expected dog");
+        assertEquals("dog", HangMan.getWord(), "Expected dog");
+    }
+
+    @Test
+    void updateHangMan() {
+
+        assertFalse(HangMan.updateHangMan("o"), "Expected false; game has not been won yet.");
+        assertFalse(HangMan.updateHangMan("d"), "Expected false; game has not been won yet.");
+        assertTrue(HangMan.updateHangMan("g"), "Expected true; word has been solved.");
+        assertFalse(HangMan.updateHangMan("c"), "Expected false; dog does not contain a c.");
     }
 
     @Test
     void getNumberOfGuesses() {
-        assertEquals(0, hangMan.getNumberOfGuesses(), "Expected 1");
+        assertEquals(0, HangMan.getNumberOfGuesses(), "Expected 1");
     }
 
     @AfterEach
