@@ -3,6 +3,7 @@ package com.tmjonker.battlehandler;
 import com.tmjonker.gamecontroller.GameController;
 import com.tmjonker.humanoid.Goblin;
 import com.tmjonker.humanoid.Human;
+import com.tmjonker.humanoid.Humanoid;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class BattleHandler {
 
     // Contains all the battle logic.
     public int[] commenceBattle(Human player) {
+
 
         Goblin goblin = new Goblin();
         goblin.setX(player.getX());
@@ -108,9 +110,7 @@ public class BattleHandler {
 
                 GameController.sleep(2000);
 
-                int[] goblinCoordinates = {goblin.getX(), goblin.getY()};
-
-                return goblinCoordinates;
+                return new int[]{goblin.getX(), goblin.getY()}; // returns goblin coordinates to put goblin in their original location.
             }
         }
 
