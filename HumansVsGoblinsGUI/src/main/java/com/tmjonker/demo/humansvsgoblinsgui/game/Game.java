@@ -13,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -93,6 +94,15 @@ public class Game {
             }
         }
 
+        for (int i = 0; i < 30; i++) {
+            int randomX = (int) (Math.random() * 14) + 1;
+            int randomY = (int) (Math.random() * 14) + 1;
+
+            Image tree = new Image("tree.png");
+            ImageView imageView = new ImageView(tree);
+            gridPane.add(imageView, randomX, randomY);
+        }
+
         playfieldLayer.setMaxHeight(Settings.PLAYFIELD_HEIGHT);
         playfieldLayer.setMaxWidth(Settings.PLAYFIELD_WIDTH);
 
@@ -114,6 +124,7 @@ public class Game {
 
         primaryStage.setTitle("Humans Vs Goblins");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("troll1.png"));
         primaryStage.setResizable(false);
         primaryStage.show();
 
