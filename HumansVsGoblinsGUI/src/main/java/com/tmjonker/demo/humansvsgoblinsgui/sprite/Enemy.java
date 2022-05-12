@@ -41,8 +41,18 @@ public class Enemy extends Sprite {
 
         if (x == enemyMaxX && dx > 0) {
             dx = -speed;
+            dy = -speed;
         } else if (x == enemyMinX && dx < 0) {
             dx = speed;
+            dy = speed;
+        }
+
+        if (y == enemyMaxY && dy > 0) {
+            dx = speed;
+            dy = -speed;
+        } else if (y == enemyMinY && dy < 0) {
+            dx = -speed;
+            dy = speed;
         }
     }
 
