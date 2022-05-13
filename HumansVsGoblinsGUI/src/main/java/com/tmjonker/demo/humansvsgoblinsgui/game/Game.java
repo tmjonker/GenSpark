@@ -140,7 +140,6 @@ public class Game {
         createCollisionLayer();
         // creates score text at top of the screen.
         createScoreLayer();
-        createPlayers();
 
         // generates 5 potions randomly on the map.
         for (int i = 0; i < 5; i++) {
@@ -151,6 +150,8 @@ public class Game {
         for (int i = 0; i < numEnemies; i++) {
             spawnEnemies();
         }
+
+        createPlayers();
 
         // The main game loop that is responsible for all the gameplay and animation.
         gameLoop = new AnimationTimer() {
@@ -219,6 +220,11 @@ public class Game {
 
         numEnemies++;
 
+        // Enemies get faster with each new round.
+        for(Enemy e: enemies) {
+            e.setSpeed(e.getSpeed() + 0.5);
+        }
+
         for (int i = 0; i < numEnemies; i++) {
             spawnEnemies();
         }
@@ -267,7 +273,7 @@ public class Game {
         instructions.setText("WELCOME TO HUMANS VS GOBLINS!");
         instructions.appendText("\nExplore the map and do battle with goblins along the way!\nAs you approach a goblin, " +
                 "the battle will automatically commence, and you will fight to the death.\nIf your health drops, grab a potion to restore health!" +
-                "\nIf you die, press the space bar to respawn.\nYour score is displayed at the top of the game window.");
+                "\n\nYour score is displayed at the top of the game window.");
         instructions.setWrapText(true);
     }
 
@@ -469,7 +475,7 @@ public class Game {
         if (player.getHealth() <= 0) {
             gameLoop.stop();
             collisionText.setText("You have died!");
-            commentary.appendText("\nYou have died...");
+            commentary.appendText("\nYou have died... Press the space bar to continue playing.");
             endOfGame = true;
             Thread endOfGameChecker = new Thread(new GameRestarter());
             endOfGameChecker.start();
