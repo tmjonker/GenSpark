@@ -48,11 +48,10 @@ public class Game {
     private List<Image> banditImages;
 
     private List<Enemy> enemies = new ArrayList<>();
-    private List<Player> players = new ArrayList<>();
     private List<Potion> potions = new ArrayList<>();
     private Enemy enemy;
     private Player player;
-    private int numEnemies = 8;
+    private int numEnemies = 3;
 
     private Input input;
 
@@ -96,7 +95,7 @@ public class Game {
         }
 
         // Add 30 trees to map.
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             int randomX = (int) (Math.random() * 14) + 1;
             int randomY = (int) (Math.random() * 14) + 1;
 
@@ -232,6 +231,9 @@ public class Game {
         for (int i = 0; i < 5; i++) {
             spawnPotions();
         }
+
+        player.removeFromLayer();
+        player.addToLayer();
     }
 
     // loads all the image files that the game will be using.
@@ -341,8 +343,6 @@ public class Game {
 
         player = new Player(playfieldLayer, playerImage, banditImages, x, y, 0, 0, Settings.PLAYER_HEALTH,
                 damage, Settings.PLAYER_SPEED, input);
-
-        players.add(player);
     }
 
     // spawns an enemy in a random location and adds them to the map.
