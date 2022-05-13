@@ -5,8 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
+import java.util.Random;
 
 public class Enemy extends Sprite {
+
+    private final Random RND = new Random();
 
     private double enemyMinX;
     private double enemyMaxX;
@@ -39,20 +42,23 @@ public class Enemy extends Sprite {
 
     public void changeDirection() {
 
-        if (x == enemyMaxX && dx > 0) {
-            dx = -speed;
-            dy = -speed;
-        } else if (x == enemyMinX && dx < 0) {
-            dx = speed;
-            dy = speed;
+        double directionYDeterminer = (RND.nextDouble() * 10) + 1;
+        double directionXDeterminer = (RND.nextDouble() * 10) + 1;
+
+        if (x == enemyMaxX) {
+            dx = directionXDeterminer > 5 ? -speed : 0;
+            dy = directionYDeterminer > 5 ? -speed : 0;
+        } else if (x == enemyMinX) {
+            dx = directionXDeterminer > 5 ? speed : 0;
+            dy = directionYDeterminer > 5 ? speed : 0;
         }
 
-        if (y == enemyMaxY && dy > 0) {
-            dx = speed;
-            dy = -speed;
-        } else if (y == enemyMinY && dy < 0) {
-            dx = -speed;
-            dy = speed;
+        if (y == enemyMaxY) {
+            dx = directionXDeterminer > 5 ? speed : 0;
+            dy = directionYDeterminer > 5 ? -speed : 0;
+        } else if (y == enemyMinY) {
+            dx = directionXDeterminer > 5 ? -speed : 0;
+            dy = directionYDeterminer > 5 ? speed : 0;
         }
     }
 

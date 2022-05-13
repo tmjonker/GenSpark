@@ -11,7 +11,7 @@ public class Settings {
     public static double PLAYER_HEALTH = 200;
     public static double MIN_PLAYER_DAMAGE = 2;
 
-    public static double ENEMY_SPEED = 1.0;
+    public static double ENEMY_SPEED = 2.0;
     public static double MIN_ENEMY_HEALTH = 100;
     public static double MIN_ENEMY_DAMAGE = 1;
 }

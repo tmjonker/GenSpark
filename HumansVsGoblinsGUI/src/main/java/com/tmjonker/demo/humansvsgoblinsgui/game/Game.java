@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class Game {
 
-    private Random rnd = new Random();
+    private final Random RND = new Random();
 
     private Pane playfieldLayer;
     private Pane scoreLayer;
@@ -304,11 +304,11 @@ public class Game {
     // Spawns a potion in a random location and adds them to the map.
     private void spawnPotions() {
 
-        double x = rnd.nextDouble() * (Settings.PLAYFIELD_WIDTH - potionImage.getWidth() - 50);
-        double y = rnd.nextDouble() * (Settings.PLAYFIELD_HEIGHT - potionImage.getHeight() - 50);
+        double x = RND.nextDouble() * (Settings.PLAYFIELD_WIDTH - potionImage.getWidth() - 50);
+        double y = RND.nextDouble() * (Settings.PLAYFIELD_HEIGHT - potionImage.getHeight() - 50);
 
-        double health = (rnd.nextDouble() * Settings.MIN_ENEMY_HEALTH) + Settings.MIN_ENEMY_HEALTH;
-        double damage = (rnd.nextDouble() * Settings.MIN_ENEMY_DAMAGE) + Settings.MIN_ENEMY_DAMAGE;
+        double health = (RND.nextDouble() * Settings.MIN_ENEMY_HEALTH) + Settings.MIN_ENEMY_HEALTH;
+        double damage = (RND.nextDouble() * Settings.MIN_ENEMY_DAMAGE) + Settings.MIN_ENEMY_DAMAGE;
 
         // create a sprite
         Potion potion = new Potion(playfieldLayer, potionImage, x, y);
@@ -326,7 +326,7 @@ public class Game {
 
         double x = (Settings.PLAYFIELD_WIDTH - playerImage.getWidth()) / 2.0;
         double y = Settings.PLAYFIELD_HEIGHT * 0.7;
-        double damage = (rnd.nextDouble() * Settings.MIN_PLAYER_DAMAGE) + Settings.MIN_PLAYER_DAMAGE;
+        double damage = (RND.nextDouble() * Settings.MIN_PLAYER_DAMAGE) + Settings.MIN_PLAYER_DAMAGE;
 
         player = new Player(playfieldLayer, playerImage, banditImages, x, y, 0, 0, Settings.PLAYER_HEALTH,
                 damage, Settings.PLAYER_SPEED, input);
@@ -337,14 +337,17 @@ public class Game {
     // spawns an enemy in a random location and adds them to the map.
     private void spawnEnemies() {
 
-        double x = rnd.nextDouble() * (Settings.PLAYFIELD_WIDTH - enemyImage.getWidth() - 50);
-        double y = rnd.nextDouble() * (Settings.PLAYFIELD_HEIGHT - enemyImage.getHeight() - 50);
+        double x = RND.nextDouble() * (Settings.PLAYFIELD_WIDTH - enemyImage.getWidth() - 50);
+        double y = RND.nextDouble() * (Settings.PLAYFIELD_HEIGHT - enemyImage.getHeight() - 50);
 
-        double health = (rnd.nextDouble() * Settings.MIN_ENEMY_HEALTH) + Settings.MIN_ENEMY_HEALTH;
-        double damage = (rnd.nextDouble() * Settings.MIN_ENEMY_DAMAGE) + Settings.MIN_ENEMY_DAMAGE;
+        double health = (RND.nextDouble() * Settings.MIN_ENEMY_HEALTH) + Settings.MIN_ENEMY_HEALTH;
+        double damage = (RND.nextDouble() * Settings.MIN_ENEMY_DAMAGE) + Settings.MIN_ENEMY_DAMAGE;
+
+        double directionDeterminer = (RND.nextDouble() * 10) + 1;
 
         // create a sprite
-        Enemy enemy = new Enemy(playfieldLayer, enemyImage, trollImages, x, y, Settings.ENEMY_SPEED, 0, health, damage);
+        Enemy enemy = new Enemy(playfieldLayer, enemyImage, trollImages, x, y,
+                directionDeterminer > 5 ? Settings.ENEMY_SPEED : -Settings.ENEMY_SPEED, 0, health, damage);
 
         // manage sprite
         enemies.add(enemy);
@@ -437,9 +440,9 @@ public class Game {
     // contains all the battle logic that occurs when player collides with an enemy.
     private void battle() {
 
-        double playerDiceRoll = (rnd.nextDouble() * 20);
-        double enemyDiceRoll = (rnd.nextDouble() * 20);
-        double hitChanceDiceRoll = (rnd.nextDouble() * 20);
+        double playerDiceRoll = (RND.nextDouble() * 20);
+        double enemyDiceRoll = (RND.nextDouble() * 20);
+        double hitChanceDiceRoll = (RND.nextDouble() * 20);
 
         if (playerDiceRoll > enemyDiceRoll) {
             if (hitChanceDiceRoll > 10) {
