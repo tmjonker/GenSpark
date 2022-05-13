@@ -8,6 +8,7 @@ import com.tmjonker.demo.humansvsgoblinsgui.sprite.Enemy;
 import com.tmjonker.demo.humansvsgoblinsgui.sprite.Player;
 import com.tmjonker.demo.humansvsgoblinsgui.sprite.Sprite;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -94,6 +95,7 @@ public class Game {
             }
         }
 
+        // Add 30 trees to map.
         for (int i = 0; i < 30; i++) {
             int randomX = (int) (Math.random() * 14) + 1;
             int randomY = (int) (Math.random() * 14) + 1;
@@ -126,6 +128,9 @@ public class Game {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("troll1.png"));
         primaryStage.setResizable(false);
+        primaryStage.setOnCloseRequest(e -> {
+            System.exit(0); // Force closes all threads upon closing of the stage.
+        });
         primaryStage.show();
 
         // loads images
