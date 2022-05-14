@@ -52,6 +52,7 @@ public class Game {
     private Enemy enemy;
     private Player player;
     private int numEnemies = 3;
+    private int numPotions = 2;
 
     private Input input;
 
@@ -141,7 +142,7 @@ public class Game {
         createScoreLayer();
 
         // generates 5 potions randomly on the map.
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numPotions; i++) {
             spawnPotions();
         }
 
@@ -218,20 +219,22 @@ public class Game {
     private void resetRound() {
 
         numEnemies++;
+        numPotions++;
+
+        for (int i = 0; i < numEnemies; i++) {
+            spawnEnemies();
+        }
 
         // Enemies get faster with each new round.
         for(Enemy e: enemies) {
             e.setSpeed(e.getSpeed() + 0.5);
         }
 
-        for (int i = 0; i < numEnemies; i++) {
-            spawnEnemies();
-        }
-
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numPotions; i++) {
             spawnPotions();
         }
 
+        // Add player to top of the playfield.
         player.removeFromLayer();
         player.addToLayer();
     }
