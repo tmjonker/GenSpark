@@ -16,12 +16,6 @@ class LetterFieldTest {
         letterField = new LetterField("dog");
     }
 
-    @AfterEach
-    void tearDown() {
-
-        System.out.println("Test has been completed.");
-    }
-
     @Test
     void updateLetterField() {
 
@@ -29,4 +23,11 @@ class LetterFieldTest {
         assertFalse(letterField.updateLetterField("o"), "Expected false because word has not been solved yet.");
         assertTrue(letterField.updateLetterField("g"), "Expected true because word has been solved.");
     }
+
+    @AfterEach
+    void tearDown() {
+
+        System.out.println("Test has been completed.");
+    }
+
 }
