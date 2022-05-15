@@ -92,7 +92,7 @@ public class HangMan {
         int highestScoreOnFile = 0;
 
         if (highScoreList.size() > 0) {
-            String hs = highScoreList.get(0);  // Highest Score in the highscores.txt file.
+            String hs = highScoreList.get(0);  // Highest Score in the highscore.txt file.
             highestScoreOnFile = Integer.parseInt(hs.substring(hs.indexOf('-') + 1, hs.length()));
         }
 

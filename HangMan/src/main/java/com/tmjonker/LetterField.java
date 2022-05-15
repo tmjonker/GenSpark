@@ -1,7 +1,6 @@
 package com.tmjonker;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LetterField {
 
