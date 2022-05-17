@@ -1,19 +1,12 @@
 package com.tmjonker.demo.humansvsgoblinsgui.accessory;
 
-import com.tmjonker.demo.humansvsgoblinsgui.game.Game;
-import com.tmjonker.demo.humansvsgoblinsgui.main.Main;
-import javafx.application.Application;
-import javafx.scene.Parent;
+
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 import java.util.function.Predicate;
