@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="Student" class="com.tmjonker.XML.Student">
+        <property name="name" value="Tim Jonker" />
+        <property name="id" value="2333695" />
+        <property name="add" ref="Address" />
+        <property name="ph" ref="phoneList" />
+    </bean>
+
+    <bean id="Address" class="com.tmjonker.XML.Address">
+        <property name="city" value="Manassas" />
+        <property name="country" value="USA" />
+        <property name="state" value="VA" />
+        <property name="zipcode" value="20111" />
+    </bean>
+
+    <bean id="Phone" class="com.tmjonker.XML.Phone">
+        <property name="mob" value="202-779-1008" />
+    </bean>
+
+    <util:list id="phoneList" list-class="java.util.ArrayList" value-type="com.tmjonker.XML.Phone">
+        <ref bean="Phone" />
+    </util:list>
+</beans>
