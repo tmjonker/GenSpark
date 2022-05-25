@@ -1,12 +1,18 @@
 package com.tmjonker.Java;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 public class Address {
 
+    @Value("#{'Manassas'}")
     private String city;
+    @Value("#{'VA'}")
     private String state;
+    @Value("#{'USA'}")
     private String country;
+    @Value("#{20111}")
+    private String zipcode;
 
     public void setCity(String city) {
         this.city = city;
@@ -33,6 +39,4 @@ public class Address {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
-
-    private String zipcode;
 }

@@ -1,16 +1,21 @@
 package com.tmjonker.Java;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
 public class Student {
 
+    @Value("#{2333695}")
     private int id;
+    @Value("#{'Tim Jonker'}")
     private String name;
     private List<Phone> ph;
     private Address add;
 
+
+    public Student() {}
     public Student(int id, String name) {
 
         this.id = id;
