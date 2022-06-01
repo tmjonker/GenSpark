@@ -1,4 +1,4 @@
-package com.tmjonker.springbootdemo.second;
+package com.tmjonker.springbootdemo.second.entities;
 
 import javax.persistence.*;
 

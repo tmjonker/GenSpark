@@ -1,37 +1,36 @@
-package com.tmjonker.springbootdemo.first;
+package com.tmjonker.springbootdemo.first.services;
 
+import com.tmjonker.springbootdemo.first.entities.Student;
+import com.tmjonker.springbootdemo.first.repositories.StudentRepository;
 import org.springframework.data.util.Streamable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-@RestController
-public class StudentsController {
+@Service
+public class StudentService {
 
     StudentRepository studentRepository;
 
-    public StudentsController(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository) {
 
         this.studentRepository = studentRepository;
     }
 
-    @GetMapping("/students")
-    public List<Student> getStudents() {
+    public List<Student> retrieveAllStudents() {
 
         return Streamable.of(studentRepository.findAll()).toList();
     }
 
-    @PostMapping("/students")
-    public Student postStudent(@RequestBody Map<String, String> studentMap) {
+    public Student addStudent(Map<String, String> studentMap) {
 
         Student student = new Student(studentMap.get("firstName"), studentMap.get("lastName"));
 
         return studentRepository.save(student);
     }
 
-    @PutMapping("/students/{id}")
-    public Student putMapping(@RequestBody Map<String, String> studentMap, @PathVariable int id) {
+    public Student updateStudent(Map<String, String> studentMap, int id) {
 
         Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
 
@@ -41,13 +40,10 @@ public class StudentsController {
         return studentRepository.save(student);
     }
 
-    @DeleteMapping("/students/{id}")
-    public String deleteMapping(@PathVariable int id) {
+    public void deleteStudent(int id) {
 
         Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
 
         studentRepository.delete(student);
-
-        return "If that student ID existed, then that student has been deleted.";
     }
 }
