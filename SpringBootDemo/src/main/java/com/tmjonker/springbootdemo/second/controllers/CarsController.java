@@ -6,7 +6,6 @@ import com.tmjonker.springbootdemo.second.services.CarService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class CarsController {

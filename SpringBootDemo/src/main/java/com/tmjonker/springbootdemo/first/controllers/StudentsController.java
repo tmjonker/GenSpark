@@ -1,14 +1,11 @@
 package com.tmjonker.springbootdemo.first.controllers;
 
 import com.tmjonker.springbootdemo.first.entities.Student;
-import com.tmjonker.springbootdemo.first.repositories.StudentRepository;
 import com.tmjonker.springbootdemo.first.requests.StudentRequest;
 import com.tmjonker.springbootdemo.first.services.StudentService;
-import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class StudentsController {
