@@ -2,6 +2,7 @@ package com.tmjonker.springbootdemo.second.services;
 
 import com.tmjonker.springbootdemo.second.entities.Car;
 import com.tmjonker.springbootdemo.second.repositories.CarRepository;
+import com.tmjonker.springbootdemo.second.requests.CarRequest;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
@@ -38,18 +39,18 @@ public class CarService {
         return carRepository.findById(id).orElseThrow(() -> new RuntimeException("No Cars with that id were found."));
     }
 
-    public Car addCar(Map<String, String> carMap) {
+    public Car addCar(CarRequest carRequest) {
 
-        Car car = new Car(carMap.get("make"), carMap.get("model"));
+        Car car = new Car(carRequest.getMake(), carRequest.getModel());
 
         return carRepository.save(car);
     }
 
-    public Car updateCar(Map<String, String> carMap, int id) {
+    public Car updateCar(CarRequest carRequest, int id) {
 
         Car car = carRepository.findById(id).orElseThrow(() -> new RuntimeException("No Cars with that id were found."));
-        car.setMake(carMap.get("make"));
-        car.setModel(carMap.get("model"));
+        car.setMake(carRequest.getMake());
+        car.setModel(carRequest.getModel());
 
         return carRepository.save(car);
     }

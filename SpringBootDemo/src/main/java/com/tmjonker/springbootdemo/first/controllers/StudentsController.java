@@ -2,6 +2,7 @@ package com.tmjonker.springbootdemo.first.controllers;
 
 import com.tmjonker.springbootdemo.first.entities.Student;
 import com.tmjonker.springbootdemo.first.repositories.StudentRepository;
+import com.tmjonker.springbootdemo.first.requests.StudentRequest;
 import com.tmjonker.springbootdemo.first.services.StudentService;
 import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
@@ -26,15 +27,15 @@ public class StudentsController {
     }
 
     @PostMapping("/students")
-    public Student postStudent(@RequestBody Map<String, String> studentMap) {
+    public Student postStudent(@RequestBody StudentRequest studentRequest) {
 
-        return studentService.addStudent(studentMap);
+        return studentService.addStudent(studentRequest);
     }
 
     @PutMapping("/students/{id}")
-    public Student putMapping(@RequestBody Map<String, String> studentMap, @PathVariable int id) {
+    public Student putMapping(@RequestBody StudentRequest studentRequest, @PathVariable int id) {
 
-        return studentService.updateStudent(studentMap, id);
+        return studentService.updateStudent(studentRequest, id);
     }
 
     @DeleteMapping("/students/{id}")

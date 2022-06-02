@@ -1,6 +1,7 @@
 package com.tmjonker.springbootdemo.second.controllers;
 
 import com.tmjonker.springbootdemo.second.entities.Car;
+import com.tmjonker.springbootdemo.second.requests.CarRequest;
 import com.tmjonker.springbootdemo.second.services.CarService;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,15 +43,15 @@ public class CarsController {
     }
 
     @PostMapping("/cars")
-    public Car postCar(@RequestBody Map<String, String> carMap) {
+    public Car postCar(@RequestBody CarRequest carRequest) {
 
-        return carService.addCar(carMap);
+        return carService.addCar(carRequest);
     }
 
     @PutMapping("/cars/{id}")
-    public Car updateCar(@RequestBody Map<String, String> carMap, @PathVariable int id) {
+    public Car updateCar(@RequestBody CarRequest carRequest, @PathVariable int id) {
 
-        return carService.updateCar(carMap, id);
+        return carService.updateCar(carRequest, id);
     }
 
     @DeleteMapping("/cars/{id}")
