@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: grey;
+    color: white;
+}
+
+form {
+    margin-top: 50px;
+}
+
+.form-class {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    padding: 20px;
+    background-color: black;
+}
+
+.sign-in-header {
+    text-align: center;
+}
+
+button {
+    margin: auto;
+    text-align: center;
+}
+
+.button-group {
+    margin: auto;
+    text-align: center;
+}
+
