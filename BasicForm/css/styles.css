@@ -21,9 +21,10 @@ form {
     border: 2px solid white;
     padding: 20px;
     background-color: black;
+    box-shadow: 5px 10px black;
 }
 
-.sign-in-header {
+.header {
     text-align: center;
 }
 
@@ -35,5 +36,10 @@ button {
 .button-group {
     margin: auto;
     text-align: center;
+}
+
+.list-group-item {
+    background-color: black;
+    color: white;
 }
 
