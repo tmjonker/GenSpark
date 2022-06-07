@@ -16,13 +16,14 @@
   <body>
     <div class="container">
       <div class="col-lg-auto align-items-center form-class">
-        <br clear="all">
+        <br clear="all" />
         <h3 class="sign-in-header">Sign up for a new account</h3>
-        <form  onsubmit="onSubmitClick(event)">
+        <form onsubmit="onSubmitClick(event)">
           <div class="mb-3 row">
             <div class="col-md-5 mb-3">
               <label for="firstNameLabel" class="form-label">First Name</label>
               <input
+                required
                 type="text"
                 class="form-control"
                 id="firstNameInput"
@@ -34,6 +35,7 @@
                 >Middle Initial</label
               >
               <input
+                required
                 type="text"
                 class="form-control"
                 id="middleInitialInput"
@@ -43,6 +45,7 @@
             <div class="col-md-5 mb-3">
               <label for="firstNameLabel" class="form-label">Last Name</label>
               <input
+                required
                 type="text"
                 class="form-control"
                 id="lastNameInput"
@@ -56,6 +59,7 @@
                 >Street Address</label
               >
               <input
+                required
                 type="text"
                 class="form-control"
                 id="streetAddressInput"
@@ -78,6 +82,7 @@
             <div class="col-md-4 mb-3">
               <label for="cityLabel" class="form-label">City</label>
               <input
+                required
                 type="text"
                 class="form-control"
                 id="cityInput"
@@ -86,7 +91,12 @@
             </div>
             <div class="col-md-4 mb-3">
               <label for="stateLabel" class="form-label">State</label>
-              <select id="stateSelector" class="form-select" aria-label="state-selector">
+              <select
+                id="stateSelector"
+                class="form-select"
+                aria-label="state-selector"
+                required
+              >
                 <option value="">Please Select</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -144,6 +154,7 @@
             <div class="col-md-4 mb-3">
               <label for="zipCodeLabel" class="form-label">Zip Code</label>
               <input
+                required
                 type="text"
                 class="form-control"
                 id="zipCodeInput"
