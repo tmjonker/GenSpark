@@ -24,6 +24,10 @@ form {
     box-shadow: 5px 10px black;
 }
 
+.form-text {
+    color: white;
+}
+
 .header {
     text-align: center;
 }

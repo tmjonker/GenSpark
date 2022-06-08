@@ -19,16 +19,8 @@ function onSubmitClick(event) {
   state = document.getElementById("stateSelector").value;
   zipCode = document.getElementById("zipCodeInput").value;
 
-  if (
-    firstName === "" ||
-    middleInitial === "" ||
-    lastName === "" ||
-    address1 === "" ||
-    city === "" ||
-    state === "" ||
-    zipCode === ""
-  ) {
-    alert("All fields must be filled in.");
+  if (!validateData()) {
+    alert("There are errors in what you have submitted.");
   } else {
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("middleInitial", middleInitial);
@@ -40,6 +32,25 @@ function onSubmitClick(event) {
     localStorage.setItem("zipCode", zipCode);
 
     location.href = "results.html";
+  }
+}
+
+function validateData() {
+  if (middleInitial.length > 1) {
+    alert("Middle Initial can only be 1 character.");
+    return false;
+  } else if (
+    firstName === "" ||
+    middleInitial === "" ||
+    lastName === "" ||
+    address1 === "" ||
+    city === "" ||
+    state === "" ||
+    zipCode === ""
+  ) {
+    return false;
+  } else {
+    return true;
   }
 }
 
