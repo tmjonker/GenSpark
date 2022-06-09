@@ -44,6 +44,16 @@ function Projects(props) {
                   />
                 </a>
               </Carousel.Item>
+              <Carousel.Item>
+                <h4>Burger Bonanza - a fictional restaurant concept</h4>
+                <a href="https://github.com/tmjonker/burger_bonanza_combined">
+                  <Picture
+                    class="d-block w-40 project-img"
+                    source="../images/bb1.png"
+                    desc="food2u"
+                  />
+                </a>
+              </Carousel.Item>
             </Carousel>
           </Col>
         </Row>

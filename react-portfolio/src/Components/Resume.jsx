@@ -37,7 +37,7 @@ function Resume(props) {
                   Manassas, VA
                 </h4>
                 <p class="resume-text">
-                  Full-stack development using Java, React, and Spring-boot
+                  Full-stack development using Java, React, and Spring boot
                 </p>
               </VerticalTimelineElement>
               <VerticalTimelineElement
