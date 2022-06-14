@@ -3,6 +3,7 @@ package net.genspark.restaurantbackend.entities.reward;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "rewards")
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String date;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "users_purchases",
             joinColumns = @JoinColumn(name = "user_id"),

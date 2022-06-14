@@ -49,4 +49,9 @@ public class MenuService {
 
         menuItemRepository.deleteById(id);
     }
+
+    public boolean existsById(int id) {
+
+        return menuItemRepository.existsById(id);
+    }
 }
