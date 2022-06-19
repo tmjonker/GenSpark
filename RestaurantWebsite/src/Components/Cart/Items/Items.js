@@ -5,8 +5,6 @@ const Items=(props)=>{
 
     let filteredCart = props.data.filter(element => element.counter > 0);
 
-    console.log(filteredCart);
-
     return(
         <div className="Items">
             <Container>

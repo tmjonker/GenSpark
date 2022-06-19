@@ -63,6 +63,11 @@ class allClass extends Component{
         this.setState({item:copy});
         
       }
+
+      clearCart = () => {
+
+        this.setState({item:[]});
+      }
       
     render(){
         
@@ -72,7 +77,7 @@ class allClass extends Component{
                 <Route path="/rewards" component={()=><Offer count={this.state.item.length}/>}/>
    <Route path="/cart" component={()=><Cart adding={()=>this.addItem} remove={()=>this.removeItem} data={this.state.item}/> }/>
    <Route path="/menu" component={()=><Menu inbox={this.state.item.length} menudata={this.state.menudata} loaded={this.state.loaded} adding={()=>this.addItem}/>}/>
-   <Route path="/order" component={()=><Order remove={()=>this.removeItem} count={this.state.item.length} data={this.state.item}/>}/>
+   <Route path="/order" component={()=><Order remove={this.clearCart} count={this.state.item.length} data={this.state.item}/>}/>
    <Route path="/login" component={()=><Login count={this.state.item.length}/>}/>
    <Route path="/account" component={()=><Account count={this.state.item.length}/>}/>
    <Route path="/" component={()=><Home count={this.state.item.length}/>}/>

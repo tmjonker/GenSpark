@@ -16,12 +16,10 @@ class OrderOnline extends Component {
             let day = date.getDate();
             let year = date.getFullYear();
 
-            let filteredCart = this.props.data.filter(element => element.counter > 0);
-
             let total = 0;
-            filteredCart.map(item => total += item.price * item.counter);
+            this.props.data.map(item => total += item.price * item.counter);
             let menuItems = [];
-            filteredCart.map(item => menuItems.push(item.id));
+            this.props.data.map(item => menuItems.push(item.id));
 
             console.log(obj);
 
@@ -43,18 +41,21 @@ class OrderOnline extends Component {
             }
 
             
-            if (filteredCart.length > 0) {
+            if (this.props.data.length > 0) {
                 axios.post("http://localhost:8080/purchase", copy).then(()=>alert("Your Order is Placed!"));
             }
             else {
                 alert("Please select some items from Menu first");
             }
-
-            window.location.reload();
+            
+            this.props.remove();
         }
 
 
         render() {
+
+            let filteredCart = this.props.data.filter(element => element.counter > 0);
+
             return (
                 <div className="OrderOnline">
                     <section className="Order">
