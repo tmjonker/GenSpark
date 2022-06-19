@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @CrossOrigin
@@ -30,7 +33,7 @@ public class AuthenticateController {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<Map<String, String>> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         authenticationService.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -39,6 +42,8 @@ public class AuthenticateController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+
+
+        return ResponseEntity.ok(Map.of("token", new JwtResponse(token).getToken(), "username", authenticationRequest.getUsername()));
     }
 }

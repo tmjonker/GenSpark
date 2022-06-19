@@ -3,6 +3,7 @@ package net.genspark.restaurantbackend.controllers;
 import net.genspark.restaurantbackend.entities.reward.Reward;
 import net.genspark.restaurantbackend.services.RewardService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,9 +20,15 @@ public class RewardController {
         this.rewardService = rewardService;
     }
 
-    @GetMapping("/rewards")
+    @PostMapping("/rewards")
     public List<Reward> getRewards(@RequestBody Map<String, String> usernameMap) {
 
         return rewardService.getRewards(usernameMap.get("username"));
+    }
+
+    @GetMapping("/rewards")
+    public List<Reward> getRewards() {
+
+        return rewardService.getRewards();
     }
 }

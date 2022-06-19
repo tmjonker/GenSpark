@@ -1,5 +1,6 @@
 package net.genspark.restaurantbackend.entities.purchase;
 
+import net.genspark.restaurantbackend.entities.address.Address;
 import net.genspark.restaurantbackend.entities.menu.MenuItem;
 import net.genspark.restaurantbackend.entities.user.User;
 
@@ -29,9 +30,14 @@ public class Purchase {
     )
     private List<MenuItem> menuItems;
 
-    public Purchase(String date, double price) {
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    public Purchase(String date, double price, Address address) {
         this.date = date;
         this.price = price;
+        this.address = address;
         menuItems = new ArrayList<>();
     }
 
@@ -48,6 +54,14 @@ public class Purchase {
 
     public int getId() {
         return id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setId(int id) {

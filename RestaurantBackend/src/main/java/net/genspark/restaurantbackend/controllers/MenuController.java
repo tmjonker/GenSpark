@@ -1,6 +1,7 @@
 package net.genspark.restaurantbackend.controllers;
 
 import net.genspark.restaurantbackend.entities.menu.MenuItem;
+import net.genspark.restaurantbackend.entities.menu.category.Category;
 import net.genspark.restaurantbackend.exceptions.MenuItemNotFoundException;
 import net.genspark.restaurantbackend.repositories.MenuItemRepository;
 import net.genspark.restaurantbackend.services.MenuService;
@@ -8,6 +9,7 @@ import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class MenuController {
@@ -41,6 +43,12 @@ public class MenuController {
     public List<MenuItem> getMenuItemsByCategory(@PathVariable String category) {
 
         return menuService.getMenuItemsByCategory(category);
+    }
+
+    @GetMapping("/api/menu/categories")
+    public List<Category> getCategories() {
+
+        return menuService.getCategories();
     }
 
     @PostMapping(value = "/api/menu/{id}")

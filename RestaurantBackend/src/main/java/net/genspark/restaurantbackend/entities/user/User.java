@@ -1,5 +1,6 @@
 package net.genspark.restaurantbackend.entities.user;
 
+import net.genspark.restaurantbackend.entities.address.Address;
 import net.genspark.restaurantbackend.entities.purchase.Purchase;
 import net.genspark.restaurantbackend.entities.reward.Reward;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +32,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String date;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "users_purchases",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -47,6 +48,14 @@ public class User implements UserDetails {
     )
     private List<Reward> rewards;
 
+    @OneToMany
+    @JoinTable(
+            name = "users_addresses",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    private List<Address> addresses;
+
     public User() {}
 
     public User(String username, String password, String email, String date) {
@@ -54,6 +63,15 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.date = date;
+    }
+
+    public void addAddress(Address address) {
+
+        addresses.add(address);
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
     public void addPurchase(Purchase purchase) {
